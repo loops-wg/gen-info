@@ -308,6 +308,8 @@ ul.toc li {
 <link href="#rfc.section.6.2" rel="Chapter" title="6.2 Embedding LOOPS in GUE">
 <link href="#rfc.section.7" rel="Chapter" title="7 IANA Considerations">
 <link href="#rfc.section.8" rel="Chapter" title="8 Security Considerations">
+<link href="#rfc.section.8.1" rel="Chapter" title="8.1 Threat model">
+<link href="#rfc.section.8.2" rel="Chapter" title="8.2 Discussion">
 <link href="#rfc.references" rel="Chapter" title="9 Informative References">
 <link href="#rfc.appendix.A" rel="Chapter" title="A Protocol used in Prototype Implementation">
 <link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 Block Code FEC">
@@ -433,7 +435,11 @@ ul.toc li {
 </li>
 <li>8.   <a href="#rfc.section.8">Security Considerations</a>
 </li>
-<li>9.   <a href="#rfc.references">Informative References</a>
+<ul><li>8.1.   <a href="#rfc.section.8.1">Threat model</a>
+</li>
+<li>8.2.   <a href="#rfc.section.8.2">Discussion</a>
+</li>
+</ul><li>9.   <a href="#rfc.references">Informative References</a>
 </li>
 <li>Appendix A.   <a href="#rfc.appendix.A">Protocol used in Prototype Implementation</a>
 </li>
@@ -684,7 +690,30 @@ ul.toc li {
 <h1 id="rfc.section.8">
 <a href="#rfc.section.8">8.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
 </h1>
-<p id="rfc.section.8.p.1">To be defined.</p>
+<p id="rfc.section.8.p.1">The security of a specific LOOPS segment will depend both on the properties of the generic information set described here and those of the encapsulation protocol employed.  The security considerations of the encapsulation protocol will apply, as will the protection afforded by any security measures provided by the encapsulation protocol.  Any LOOPS encapsulation specification is expected to provide information about preferred configurations of the encapsulation protocol employed, including security mechanisms, and to provide a security considerations section discussing the combination.  The following discussion aims at discussing security considerations that will be common between different encapsulations.</p>
+<h1 id="rfc.section.8.1">
+<a href="#rfc.section.8.1">8.1.</a> <a href="#threat-model" id="threat-model">Threat model</a>
+</h1>
+<p id="rfc.section.8.1.p.1">Attackers might attempt to perturb the operation of a LOOPS segment for a number of purposes:</p>
+<p></p>
+
+<ul>
+<li>Denial of Service: Damaging the ability of LOOPS to recover packets, or damaging packet forwarding through the LOOPS segment in general.</li>
+<li>Attacks on Confidentiality or Integrity: Obtaining the content of data packets, modifying them, injecting new or suppressing specific data packets.</li>
+</ul>
+<p id="rfc.section.8.1.p.3">For the purposes of these security considerations, we can distinguish three classes of attackers:</p>
+<p></p>
+
+<ol>
+<li>on-path read-write: The attacker sees packets under way on the segment and can modify, inject, or suppress them.  <br><br> In this case there is really nothing LOOPS can do, except for acting as a full security protocol on its own, which would be the task of the encapsulation protocol.  Without that, attackers already can manipulate the packet stream as they wish.  This class of attackers is considered out of scope for these security considerations.</li>
+<li>on-path read + inject: The attacker sees packets under way on the segment and can inject new packets.  <br><br> For this case, LOOPS itself similarly cannot add to the confidentiality of the data stream.  However, LOOPS could protect against denial of service against its own protocol operation and, in a limited fashion, against attacks on integrity that wouldn&#8217;t already have been possible by packet injection without LOOPS.</li>
+<li>off-path inject: The attacker can inject new packets, but cannot see existing packets under way on the segment.  <br><br> Similar considerations apply as for class 2, except that the &#8220;blind&#8221; class 3 attacker might need to guess information it could have extracted from the packet stream in class 2.</li>
+</ol>
+<h1 id="rfc.section.8.2">
+<a href="#rfc.section.8.2">8.2.</a> <a href="#discussion-1" id="discussion-1">Discussion</a>
+</h1>
+<p id="rfc.section.8.2.p.1">Class 2 attackers can see e.g. sequence numbers and can inject, but not modify traffic.  Attacks might include injecting NACKs, initial PSN flags, &#8230; (TBD)</p>
+<p id="rfc.section.8.2.p.2">Class 3 (&#8220;blind&#8221;) attackers might still be able to fake initial PSN bits + NACKs, but will have a harder time otherwise as it would need to guess the PSN range in which it can wreak havoc.  Even random guesses will sometimes hit, though, so the protocol needs to be robust to such injection attacks. &#8230; (TBD)</p>
 <h1 id="rfc.references">
 <a href="#rfc.references">9.</a> Informative References</h1>
 <table><tbody>
