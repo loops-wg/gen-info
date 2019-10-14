@@ -2,7 +2,7 @@
 
 This is the working area for the individual Internet-Draft, "LOOPS Generic Information Set".
 
-* [Editor's Copy](https://loops-wg.github.io/gen-info/#go.draft-welzl-loops-gen-info.html)
+* [Editor's Copy](https://loops-wg.github.io/gen-info/#go.draft-welzl-loops-gen-info.html)    [![Build Status](https://travis-ci.org/loops-wg/gen-info.svg?branch=master)](https://travis-ci.org/loops-wg/gen-info)
 * [Individual Draft](https://tools.ietf.org/html/draft-welzl-loops-gen-info)
 * [Compare Editor's Copy to Individual Draft](https://loops-wg.github.io/gen-info/#go.draft-welzl-loops-gen-info.diff)
 
