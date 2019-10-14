@@ -1,6 +1,6 @@
 ---
 stand_alone: true
-docname: draft-welzl-loops-gen-info-01
+docname: draft-welzl-loops-gen-info-latest
 cat: std
 submissiontype: IETF
 ipr: trust200902
@@ -15,7 +15,7 @@ pi:
 title: LOOPS Generic Information Set
 abbrev: LOOPS
 wg: TSVWG
-date: 2019-09-03
+# date: 2019-10-14
 author:
 - name: Michael Welzl
   org: University of Oslo
@@ -169,10 +169,10 @@ proposal makes.
 
 ## Terminology
 
-<!-- 
+<!--
 {:: boilerplate bcp14}
  -->
- 
+
 This document makes use of the terminology defined in
 {{I-D.li-tsvwg-loops-problem-opportunities}}.
 This section defines additional terminology used by this document.
@@ -278,7 +278,7 @@ provided in the Setup Information.  The limit can be used to compute a
 deadline for retransmission, but also can be used to choose FEC
 parameters that keep extra latency low.
 
-<!-- 
+<!--
 Spurious retransmission can be avoided even with DUPACK-based
 end-to-end protocols if the LOOPS egress resequences the data
 packets.  With FEC based local recovery, this is relatively easy to
@@ -329,7 +329,7 @@ transport.
 If the end-to-end transport is ECN-capable (which is visible at the IP
 level), congestion loss events can easily be signaled to them by
 setting the CE (congestion experienced) mark.
-<!-- 
+<!--
 While end-hosts are increasingly ECN-capable, LOOPS must also work with
 legacy end-hosts, or on paths that suppress ECN negotiation.
  -->
@@ -344,7 +344,7 @@ to recover most packets, in particular for burst losses.
 know the end-to-end RTT.  Some lower bound derived from configuration
 and measurements could be used instead.)
 
-<!-- 
+<!--
 The maximum latency increase provided
 in the setup information should be able to provide a useful lower
 bound for that, though.
@@ -452,7 +452,7 @@ million packets (or 2.4 GB at typical packet sizes) per worst-case
 RTT.  So if that is, say, 30 seconds, this would be enough to fill 640
 Mbit/s.
 
-<!-- 
+<!--
 The transmission counter (TC) can be used to remove retransmission
 ambiguity in measurement feedback.  (The PSN could be used at the
 LOOPS egress for resequencing, which would be thwarted by setting a
