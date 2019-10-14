@@ -688,8 +688,69 @@ required in the registries that pertain to that protocol.
 
 # Security Considerations
 
-To be defined.
+The security of a specific LOOPS segment will depend both on the
+properties of the generic information set described here and those of
+the encapsulation protocol employed.  The security considerations of
+the encapsulation protocol will apply, as will the protection afforded
+by any security measures provided by the encapsulation protocol.
+Any LOOPS encapsulation specification is expected to provide
+information about preferred configurations of the encapsulation
+protocol employed, including security mechanisms, and to provide a
+security considerations section discussing the combination.
+The following discussion aims at discussing security considerations
+that will be common between different encapsulations.
 
+## Threat model
+
+Attackers might attempt to perturb the operation of a LOOPS segment
+for a number of purposes:
+
+* Denial of Service: Damaging the ability of LOOPS to recover packets,
+  or damaging packet forwarding through the LOOPS segment in general.
+* Attacks on Confidentiality or Integrity: Obtaining the content of
+  data packets, modifying them, injecting new or suppressing specific
+  data packets.
+
+For the purposes of these security considerations, we can distinguish
+three classes of attackers:
+
+1. on-path read-write: The attacker sees packets under way on the
+   segment and can modify, inject, or suppress them.
+
+   In this case there is really nothing LOOPS can do, except for
+   acting as a full security protocol on its own, which would be the
+   task of the encapsulation protocol.  Without that, attackers
+   already can manipulate the packet stream as they wish.  This class
+   of attackers is considered out of scope for these security
+   considerations.
+
+2. on-path read + inject: The attacker sees packets under way on the
+   segment and can inject new packets.
+
+   For this case, LOOPS itself similarly cannot add to the
+   confidentiality of the data stream.  However, LOOPS could protect
+   against denial of service against its own protocol operation and,
+   in a limited fashion, against attacks on integrity that wouldn't
+   already have been possible by packet injection without LOOPS.
+
+3. off-path inject: The attacker can inject new packets, but cannot
+   see existing packets under way on the segment.
+
+   Similar considerations apply as for class 2, except that the
+   "blind" class 3 attacker might need to guess information it could
+   have extracted from the packet stream in class 2.
+
+## Discussion
+
+Class 2 attackers can see e.g. sequence numbers and can inject, but
+not modify traffic.  Attacks might include injecting NACKs, initial
+PSN flags, ... (TBD)
+
+Class 3 (“blind”) attackers might still be able to fake initial PSN
+bits + NACKs, but will have a harder time otherwise as it would need
+to guess the PSN range in which it can wreak havoc.  Even random
+guesses will sometimes hit, though, so the protocol needs to be robust
+to such injection attacks. ... (TBD)
 
 --- back
 
