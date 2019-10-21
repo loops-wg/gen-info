@@ -15,7 +15,7 @@ pi:
 title: LOOPS Generic Information Set
 abbrev: LOOPS
 wg: TSVWG
-# date: 2019-10-14
+# date: 2019-10-21
 author:
 - name: Michael Welzl
   org: University of Oslo
@@ -169,9 +169,7 @@ proposal makes.
 
 ## Terminology
 
-<!--
-{:: boilerplate bcp14}
- -->
+{::boilerplate bcp14}
 
 This document makes use of the terminology defined in
 {{I-D.li-tsvwg-loops-problem-opportunities}}.
@@ -433,9 +431,8 @@ piggybacked like the forward information.
 In the forward information, we have identified:
 
 - tunnel type  (a few bits, meaning agreed between Ingress and Egress)
-- packet sequence number PSN (20+ bits), counting the LOOPS packets
-  transmitted by the LOOPS ingress (i.e., retransmissions receive a
-  new PSN)
+- packet sequence number PSN (20+ bits), counting the data packets forwarded
+  transmitted by the LOOPS ingress (i.e., retransmissions re-use the PSN)
 - an “ACK desirable” flag (one bit, usually set for a certain
   percentage of the data packets only)
 - anything that the FEC scheme needs.
@@ -556,6 +553,14 @@ absolute time of transmission as well, and block1 information would echo it
 back.  This trades memory management at the ingress for increased
 bandwidth and MTU reduction.)
 
+When a data packet has been transmitted, it may not be clear which
+specific copy is acknowledged in a block 1 acknowledgement: the
+acknowledgement for the initial (or, more generally, an earlier) copy
+may have been delayed (ACK ambiguity)).  The LOOPS ingress therefore
+SHOULD NOT base its measurements on acknowledgements for retransmitted
+data packets.  One way to achieve this is by not setting the "ACK
+desired" bit on retransmissions in the first place.
+
 The LOOPS ingress can also use the time of reception of the block 1
 acknowledgement to obtain a segment RTT sample.  Note that this will
 include any wait time the LOOPS egress incurs while waiting for a
@@ -615,16 +620,9 @@ LOOPS Egress node, resequencing may be a viable choice.  Note that
 resequencing could be switched off and on depending on some
 measurement information.
 
-To enable resequencing at the LOOPS Egress, a packet numbering scheme
-is needed that allows the LOOPS Egress to reconstruct the sequence at
-the LOOPS ingress.  This could be done by reverting to a traditional
-packet sequence number counting incoming data packets, possibly
-combined with a "retransmission" bit that indicates that the specific
-LOOPS packet is a retransmission and not the original transmission.
-(The acknowledgement/measurement ambiguity could be further reduced by
-adding transmission counter TC that counts transmission/retransmission
-for this PSN; a few bits should be enough for the limited retransmission
-envisaged.)
+The packet numbering scheme chosen by LOOPS already provides the
+necessary information for the LOOPS Egress to reconstruct the sequence
+of data packets at the LOOPS ingress.
 
 # Sketches of Bindings to Tunnel Protocols {#sec-sketches}
 
