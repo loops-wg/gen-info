@@ -310,7 +310,9 @@ ul.toc li {
 <link href="#rfc.section.8" rel="Chapter" title="8 Security Considerations">
 <link href="#rfc.section.8.1" rel="Chapter" title="8.1 Threat model">
 <link href="#rfc.section.8.2" rel="Chapter" title="8.2 Discussion">
-<link href="#rfc.references" rel="Chapter" title="9 Informative References">
+<link href="#rfc.references" rel="Chapter" title="9 References">
+<link href="#rfc.references.1" rel="Chapter" title="9.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="9.2 Informative References">
 <link href="#rfc.appendix.A" rel="Chapter" title="A Protocol used in Prototype Implementation">
 <link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 Block Code FEC">
 <link href="#rfc.appendix.B" rel="Chapter" title="B Transparent mode">
@@ -321,12 +323,12 @@ ul.toc li {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.32.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.33.0 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Welzl, M. and C. Bormann, Ed." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-welzl-loops-gen-info-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-10-14" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-10-21" />
   <meta name="dct.abstract" content="LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.   provides an overview over the problems and optimization opportunities that LOOPS could address.The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format.The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE  and Geneve ." />
   <meta name="description" content="LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.   provides an overview over the problems and optimization opportunities that LOOPS could address.The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format.The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE  and Geneve ." />
 
@@ -350,12 +352,12 @@ ul.toc li {
 <td class="right">C. Bormann, Ed.</td>
 </tr>
 <tr>
-<td class="left">Expires: April 16, 2020</td>
+<td class="left">Expires: April 23, 2020</td>
 <td class="right">Universit&#228;t Bremen TZI</td>
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">October 14, 2019</td>
+<td class="right">October 21, 2019</td>
 </tr>
 
     	
@@ -373,7 +375,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on April 16, 2020.</p>
+<p>This Internet-Draft will expire on April 23, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -439,9 +441,13 @@ ul.toc li {
 </li>
 <li>8.2.   <a href="#rfc.section.8.2">Discussion</a>
 </li>
-</ul><li>9.   <a href="#rfc.references">Informative References</a>
+</ul><li>9.   <a href="#rfc.references">References</a>
 </li>
-<li>Appendix A.   <a href="#rfc.appendix.A">Protocol used in Prototype Implementation</a>
+<ul><li>9.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>9.2.   <a href="#rfc.references.2">Informative References</a>
+</li>
+</ul><li>Appendix A.   <a href="#rfc.appendix.A">Protocol used in Prototype Implementation</a>
 </li>
 <ul><li>A.1.   <a href="#rfc.appendix.A.1">Block Code FEC</a>
 </li>
@@ -512,7 +518,8 @@ ul.toc li {
 <h1 id="rfc.section.1.1">
 <a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Terminology</a>
 </h1>
-<p id="rfc.section.1.1.p.1">This document makes use of the terminology defined in <a href="#I-D.li-tsvwg-loops-problem-opportunities" class="xref">[I-D.li-tsvwg-loops-problem-opportunities]</a>.  This section defines additional terminology used by this document.</p>
+<p id="rfc.section.1.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in BCP&#160;14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
+<p id="rfc.section.1.1.p.2">This document makes use of the terminology defined in <a href="#I-D.li-tsvwg-loops-problem-opportunities" class="xref">[I-D.li-tsvwg-loops-problem-opportunities]</a>.  This section defines additional terminology used by this document.</p>
 <p></p>
 
 <dl>
@@ -604,7 +611,7 @@ ul.toc li {
 
 <ul>
 <li>tunnel type  (a few bits, meaning agreed between Ingress and Egress)</li>
-<li>packet sequence number PSN (20+ bits), counting the LOOPS packets transmitted by the LOOPS ingress (i.e., retransmissions receive a new PSN)</li>
+<li>packet sequence number PSN (20+ bits), counting the data packets forwarded transmitted by the LOOPS ingress (i.e., retransmissions re-use the PSN)</li>
 <li>an &#8220;ACK desirable&#8221; flag (one bit, usually set for a certain percentage of the data packets only)</li>
 <li>anything that the FEC scheme needs.</li>
 </ul>
@@ -646,8 +653,9 @@ ul.toc li {
 <a href="#rfc.section.5.3">5.3.</a> <a href="#sec-meas" id="sec-meas">Measurement</a>
 </h1>
 <p id="rfc.section.5.3.p.1">When sending a block 1 acknowledgement, the LOOPS egress indicates the absolute time of reception of the packet.  The LOOPS ingress can subtract the absolute time of transmission that it still has available, resulting in one high quality latency sample.  (In an alternative design, the forward information could include the absolute time of transmission as well, and block1 information would echo it back.  This trades memory management at the ingress for increased bandwidth and MTU reduction.)</p>
-<p id="rfc.section.5.3.p.2">The LOOPS ingress can also use the time of reception of the block 1 acknowledgement to obtain a segment RTT sample.  Note that this will include any wait time the LOOPS egress incurs while waiting for a piggybacking opportunity &#8212; this is appropriate, as all uses of an RTT will be for keeping a retransmission timeout.</p>
-<p id="rfc.section.5.3.p.3">To maintain quality of information during idle times, the LOOPS ingress may send keepalive packets, which are discarded at the LOOPS egress after sending acknowledgements.  The indication that a packet is a keepalive packet is dependent on the encapsulation protocol.</p>
+<p id="rfc.section.5.3.p.2">When a data packet has been transmitted, it may not be clear which specific copy is acknowledged in a block 1 acknowledgement: the acknowledgement for the initial (or, more generally, an earlier) copy may have been delayed (ACK ambiguity)).  The LOOPS ingress therefore SHOULD NOT base its measurements on acknowledgements for retransmitted data packets.  One way to achieve this is by not setting the &#8220;ACK desired&#8221; bit on retransmissions in the first place.</p>
+<p id="rfc.section.5.3.p.3">The LOOPS ingress can also use the time of reception of the block 1 acknowledgement to obtain a segment RTT sample.  Note that this will include any wait time the LOOPS egress incurs while waiting for a piggybacking opportunity &#8212; this is appropriate, as all uses of an RTT will be for keeping a retransmission timeout.</p>
+<p id="rfc.section.5.3.p.4">To maintain quality of information during idle times, the LOOPS ingress may send keepalive packets, which are discarded at the LOOPS egress after sending acknowledgements.  The indication that a packet is a keepalive packet is dependent on the encapsulation protocol.</p>
 <h1 id="rfc.section.5.4">
 <a href="#rfc.section.5.4">5.4.</a> <a href="#loss-detection-and-recovery" id="loss-detection-and-recovery">Loss detection and Recovery</a>
 </h1>
@@ -666,7 +674,7 @@ ul.toc li {
 </h1>
 <p id="rfc.section.5.5.p.1">Without progress in the way that end-host transport protocols handle reordering, LOOPS will be unable to prevent end-to-end retransmissions that duplicate effort that is spent in local retransmissions.  It depends on parameters of the path segment whether this wasted effort is significant or not.</p>
 <p id="rfc.section.5.5.p.2">One remedy against this waste could be the introduction of resequencing at the LOOPS Egress node.  This increases overall mean packet latency, but does not always increase actual end-to-end data stream latency if a head-of-line blocking transport such as TCP is in use.  For applications with a large percentage of legacy TCP end-hosts and sufficient processing capabilities at the LOOPS Egress node, resequencing may be a viable choice.  Note that resequencing could be switched off and on depending on some measurement information.</p>
-<p id="rfc.section.5.5.p.3">To enable resequencing at the LOOPS Egress, a packet numbering scheme is needed that allows the LOOPS Egress to reconstruct the sequence at the LOOPS ingress.  This could be done by reverting to a traditional packet sequence number counting incoming data packets, possibly combined with a &#8220;retransmission&#8221; bit that indicates that the specific LOOPS packet is a retransmission and not the original transmission.  (The acknowledgement/measurement ambiguity could be further reduced by adding transmission counter TC that counts transmission/retransmission for this PSN; a few bits should be enough for the limited retransmission envisaged.)</p>
+<p id="rfc.section.5.5.p.3">The packet numbering scheme chosen by LOOPS already provides the necessary information for the LOOPS Egress to reconstruct the sequence of data packets at the LOOPS ingress.</p>
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#sec-sketches" id="sec-sketches">Sketches of Bindings to Tunnel Protocols</a>
 </h1>
@@ -715,7 +723,23 @@ ul.toc li {
 <p id="rfc.section.8.2.p.1">Class 2 attackers can see e.g. sequence numbers and can inject, but not modify traffic.  Attacks might include injecting NACKs, initial PSN flags, &#8230; (TBD)</p>
 <p id="rfc.section.8.2.p.2">Class 3 (&#8220;blind&#8221;) attackers might still be able to fake initial PSN bits + NACKs, but will have a harder time otherwise as it would need to guess the PSN range in which it can wreak havoc.  Even random guesses will sometimes hit, though, so the protocol needs to be robust to such injection attacks. &#8230; (TBD)</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">9.</a> Informative References</h1>
+<a href="#rfc.references">9.</a> References</h1>
+<h1 id="rfc.references.1">
+<a href="#rfc.references.1">9.1.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="RFC2119">[RFC2119]</b></td>
+<td class="top">
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8174">[RFC8174]</b></td>
+<td class="top">
+<a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.references.2">
+<a href="#rfc.references.2">9.2.</a> Informative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="RFC1982">[RFC1982]</b></td>

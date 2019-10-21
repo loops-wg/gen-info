@@ -5,8 +5,8 @@
 TSVWG                                                           M. Welzl
 Internet-Draft                                        University of Oslo
 Intended status: Standards Track                         C. Bormann, Ed.
-Expires: April 16, 2020                          Universitaet Bremen TZI
-                                                        October 14, 2019
+Expires: April 23, 2020                          Universitaet Bremen TZI
+                                                        October 21, 2019
 
 
                      LOOPS Generic Information Set
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 16, 2020.
+   This Internet-Draft will expire on April 23, 2020.
 
 
 
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Welzl & Bormann          Expires April 16, 2020                 [Page 1]
+Welzl & Bormann          Expires April 23, 2020                 [Page 1]
 
 Internet-Draft                    LOOPS                     October 2019
 
@@ -93,31 +93,33 @@ Table of Contents
      5.2.  Acknowledgement Generation  . . . . . . . . . . . . . . .  11
      5.3.  Measurement . . . . . . . . . . . . . . . . . . . . . . .  12
      5.4.  Loss detection and Recovery . . . . . . . . . . . . . . .  12
-       5.4.1.  Local Retransmission  . . . . . . . . . . . . . . . .  12
+       5.4.1.  Local Retransmission  . . . . . . . . . . . . . . . .  13
        5.4.2.  FEC . . . . . . . . . . . . . . . . . . . . . . . . .  13
      5.5.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .  13
-   6.  Sketches of Bindings to Tunnel Protocols  . . . . . . . . . .  13
+   6.  Sketches of Bindings to Tunnel Protocols  . . . . . . . . . .  14
      6.1.  Embedding LOOPS in Geneve . . . . . . . . . . . . . . . .  14
      6.2.  Embedding LOOPS in GUE  . . . . . . . . . . . . . . . . .  14
    7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
      8.1.  Threat model  . . . . . . . . . . . . . . . . . . . . . .  15
      8.2.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .  16
-   9.  Informative References  . . . . . . . . . . . . . . . . . . .  16
-   Appendix A.  Protocol used in Prototype Implementation  . . . . .  18
-     A.1.  Block Code FEC  . . . . . . . . . . . . . . . . . . . . .  19
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  16
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  17
 
 
 
-Welzl & Bormann          Expires April 16, 2020                 [Page 2]
+Welzl & Bormann          Expires April 23, 2020                 [Page 2]
 
 Internet-Draft                    LOOPS                     October 2019
 
 
-   Appendix B.  Transparent mode . . . . . . . . . . . . . . . . . .  19
-     B.1.  Packet identification . . . . . . . . . . . . . . . . . .  20
-     B.2.  Generic information and protocol operation  . . . . . . .  21
-     B.3.  A hybrid mode . . . . . . . . . . . . . . . . . . . . . .  21
+   Appendix A.  Protocol used in Prototype Implementation  . . . . .  18
+     A.1.  Block Code FEC  . . . . . . . . . . . . . . . . . . . . .  19
+   Appendix B.  Transparent mode . . . . . . . . . . . . . . . . . .  20
+     B.1.  Packet identification . . . . . . . . . . . . . . . . . .  21
+     B.2.  Generic information and protocol operation  . . . . . . .  22
+     B.3.  A hybrid mode . . . . . . . . . . . . . . . . . . . . . .  22
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  24
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
 
@@ -163,9 +165,7 @@ Internet-Draft                    LOOPS                     October 2019
 
 
 
-
-
-Welzl & Bormann          Expires April 16, 2020                 [Page 3]
+Welzl & Bormann          Expires April 23, 2020                 [Page 3]
 
 Internet-Draft                    LOOPS                     October 2019
 
@@ -221,12 +221,18 @@ Internet-Draft                    LOOPS                     October 2019
 
 
 
-Welzl & Bormann          Expires April 16, 2020                 [Page 4]
+Welzl & Bormann          Expires April 23, 2020                 [Page 4]
 
 Internet-Draft                    LOOPS                     October 2019
 
 
 1.1.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
 
    This document makes use of the terminology defined in
    [I-D.li-tsvwg-loops-problem-opportunities].  This section defines
@@ -269,18 +275,15 @@ Internet-Draft                    LOOPS                     October 2019
    Sender:  Original sender of a packet on an end-to-end path that
       includes one or more LOOPS segment(s).
 
-   Receiver:  Ultimate receiver of a packet on an end-to-end path that
-      includes one or more LOOPS segment(s).
 
 
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                 [Page 5]
+Welzl & Bormann          Expires April 23, 2020                 [Page 5]
 
 Internet-Draft                    LOOPS                     October 2019
 
+
+   Receiver:  Ultimate receiver of a packet on an end-to-end path that
+      includes one or more LOOPS segment(s).
 
 2.  Challenges
 
@@ -327,17 +330,17 @@ Internet-Draft                    LOOPS                     October 2019
    The waste of bandwidth caused by a DUPACK-based end-to-end
    retransmission can be avoided when the end-to-end loss detection is
    based on time instead of sequence numbers, e.g., with RACK
-   [I-D.ietf-tcpm-rack].  This requires a limit on the additional
-   latency that LOOPS will incur in its attempt to recover the loss
-   locally.  In the present version of this document, opportunity to set
 
 
 
-Welzl & Bormann          Expires April 16, 2020                 [Page 6]
+Welzl & Bormann          Expires April 23, 2020                 [Page 6]
 
 Internet-Draft                    LOOPS                     October 2019
 
 
+   [I-D.ietf-tcpm-rack].  This requires a limit on the additional
+   latency that LOOPS will incur in its attempt to recover the loss
+   locally.  In the present version of this document, opportunity to set
    such a limit is provided in the Setup Information.  The limit can be
    used to compute a deadline for retransmission, but also can be used
    to choose FEC parameters that keep extra latency low.
@@ -383,17 +386,17 @@ Internet-Draft                    LOOPS                     October 2019
    IP level), congestion loss events can easily be signaled to them by
    setting the CE (congestion experienced) mark.  If LOOPS detects a
    congestion loss for a non-ECT packet, it needs to signal a congestion
-   loss event by introducing a packet loss.  This can be done by
-   choosing not to retransmit or repair the packet loss locally in this
-   case.  Note that one congestion loss per end-to-end RTT is sufficient
 
 
 
-Welzl & Bormann          Expires April 16, 2020                 [Page 7]
+Welzl & Bormann          Expires April 23, 2020                 [Page 7]
 
 Internet-Draft                    LOOPS                     October 2019
 
 
+   loss event by introducing a packet loss.  This can be done by
+   choosing not to retransmit or repair the packet loss locally in this
+   case.  Note that one congestion loss per end-to-end RTT is sufficient
    to provide the rate reduction, so LOOPS may still be able to recover
    most packets, in particular for burst losses.  (As LOOPS does not
    interact with the end-to-end transport, it does not know the end-to-
@@ -439,16 +442,17 @@ Internet-Draft                    LOOPS                     October 2019
    LOOPS ultimately is to assist the end-to-end protocol, it is likely
    that some cooperation between them would be beneficial, e.g., to
    obtain some measurements that cover a larger part of the end-to-end
-   path.  For instance, cooperating LOOPS segments could try to divide
-   up permissible increases to end-to-end latency between them.  This is
-   out of scope for the present version.
 
 
 
-Welzl & Bormann          Expires April 16, 2020                 [Page 8]
+Welzl & Bormann          Expires April 23, 2020                 [Page 8]
 
 Internet-Draft                    LOOPS                     October 2019
 
+
+   path.  For instance, cooperating LOOPS segments could try to divide
+   up permissible increases to end-to-end latency between them.  This is
+   out of scope for the present version.
 
    Another simplifying assumption is that LOOPS nodes have reasonably
    precise absolute time available to them, so there is no need to
@@ -494,17 +498,17 @@ Internet-Draft                    LOOPS                     October 2019
    o  tunnel type (a few bits, meaning agreed between Ingress and
       Egress)
 
-   o  packet sequence number PSN (20+ bits), counting the LOOPS packets
-      transmitted by the LOOPS ingress (i.e., retransmissions receive a
-      new PSN)
 
 
 
-
-Welzl & Bormann          Expires April 16, 2020                 [Page 9]
+Welzl & Bormann          Expires April 23, 2020                 [Page 9]
 
 Internet-Draft                    LOOPS                     October 2019
 
+
+   o  packet sequence number PSN (20+ bits), counting the data packets
+      forwarded transmitted by the LOOPS ingress (i.e., retransmissions
+      re-use the PSN)
 
    o  an "ACK desirable" flag (one bit, usually set for a certain
       percentage of the data packets only)
@@ -549,19 +553,20 @@ Internet-Draft                    LOOPS                     October 2019
    packets that have "ACK desirable" set.  Block 2 information is sent
    by the receiver based on some saturation scheme (e.g., at least three
    copies for each PSN span over time).  Still, it might be possible to
+
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 10]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
    go down to 1 or 2 amortized bytes per forward packet spent for all
    this.
 
    The latency calculation is done by the sender, who occasionally sets
    "ACK desirable", and notes down the absolute time of transmission for
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 10]
-
-Internet-Draft                    LOOPS                     October 2019
-
-
    this data packet (the timekeeping can be done quite efficiently as
    deltas).  Upon reception of a block 1 ACK, it can then subtract that
    from the absolute time of reception indicated.  This assumes time
@@ -605,18 +610,18 @@ Internet-Draft                    LOOPS                     October 2019
    with the "ACK desired" bit as the ACK number in the block 1 part of
    the acknowledgement.  This means that the LOOPS ingress gets to
    modulate the number of acknowledgement sent by the LOOPS egress.
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 11]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
    However, whenever an out-of-order packet arrives while there still
    are "holes" in the PSNs received, the LOOPS receiver should generate
    a block 2 acknowledgement immediately that the LOOPS sender can use
    as a NACK list.
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 11]
-
-Internet-Draft                    LOOPS                     October 2019
-
 
    Reverse information can be piggybacked in a reverse direction data
    packet.  When the reverse direction has no user data to be sent, a
@@ -636,6 +641,14 @@ Internet-Draft                    LOOPS                     October 2019
    echo it back.  This trades memory management at the ingress for
    increased bandwidth and MTU reduction.)
 
+   When a data packet has been transmitted, it may not be clear which
+   specific copy is acknowledged in a block 1 acknowledgement: the
+   acknowledgement for the initial (or, more generally, an earlier) copy
+   may have been delayed (ACK ambiguity)).  The LOOPS ingress therefore
+   SHOULD NOT base its measurements on acknowledgements for
+   retransmitted data packets.  One way to achieve this is by not
+   setting the "ACK desired" bit on retransmissions in the first place.
+
    The LOOPS ingress can also use the time of reception of the block 1
    acknowledgement to obtain a segment RTT sample.  Note that this will
    include any wait time the LOOPS egress incurs while waiting for a
@@ -651,6 +664,16 @@ Internet-Draft                    LOOPS                     October 2019
 
    There are two ways for LOOPS local recovery, retransmission and FEC.
 
+
+
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 12]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
 5.4.1.  Local Retransmission
 
    When retransmission is used as recovery mechanism, the LOOPS ingress
@@ -664,15 +687,6 @@ Internet-Draft                    LOOPS                     October 2019
    retransmitting the packet.  Further retransmissions may be desirable
    if the NACK is persistent beyond an RTO, as long as the maximum
    latency increase is not reached.
-
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 12]
-
-Internet-Draft                    LOOPS                     October 2019
-
 
 5.4.2.  FEC
 
@@ -702,16 +716,19 @@ Internet-Draft                    LOOPS                     October 2019
    could be switched off and on depending on some measurement
    information.
 
-   To enable resequencing at the LOOPS Egress, a packet numbering scheme
-   is needed that allows the LOOPS Egress to reconstruct the sequence at
-   the LOOPS ingress.  This could be done by reverting to a traditional
-   packet sequence number counting incoming data packets, possibly
-   combined with a "retransmission" bit that indicates that the specific
-   LOOPS packet is a retransmission and not the original transmission.
-   (The acknowledgement/measurement ambiguity could be further reduced
-   by adding transmission counter TC that counts transmission/
-   retransmission for this PSN; a few bits should be enough for the
-   limited retransmission envisaged.)
+   The packet numbering scheme chosen by LOOPS already provides the
+   necessary information for the LOOPS Egress to reconstruct the
+   sequence of data packets at the LOOPS ingress.
+
+
+
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 13]
+
+Internet-Draft                    LOOPS                     October 2019
+
 
 6.  Sketches of Bindings to Tunnel Protocols
 
@@ -722,14 +739,6 @@ Internet-Draft                    LOOPS                     October 2019
    "native" way by putting each of the various elements into the TLV
    format of the encapsulation protocol, or it can be achieved by
    providing single TLVs for forward and reverse information and using
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 13]
-
-Internet-Draft                    LOOPS                     October 2019
-
-
    some generic encoding of both kinds of information as shown in
    Appendix B.3.
 
@@ -769,22 +778,18 @@ Internet-Draft                    LOOPS                     October 2019
 
    In the reverse direction, when no data packets are available for
    piggybacking, LOOPS reverse information is carried in a control
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 14]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
    message with the C-bit set in the GUE header.  The Proto/ctype field
    contains a control message type when C bit is set.  Hence a new
    control message type should be defined for such LOOPS reverse
    information.
-
-
-
-
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 14]
-
-Internet-Draft                    LOOPS                     October 2019
-
 
 7.  IANA Considerations
 
@@ -829,18 +834,17 @@ Internet-Draft                    LOOPS                     October 2019
        In this case there is really nothing LOOPS can do, except for
        acting as a full security protocol on its own, which would be the
        task of the encapsulation protocol.  Without that, attackers
-       already can manipulate the packet stream as they wish.  This
-       class of attackers is considered out of scope for these security
-       considerations.
 
 
 
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 15]
+Welzl & Bormann          Expires April 23, 2020                [Page 15]
 
 Internet-Draft                    LOOPS                     October 2019
 
+
+       already can manipulate the packet stream as they wish.  This
+       class of attackers is considered out of scope for these security
+       considerations.
 
    2.  on-path read + inject: The attacker sees packets under way on the
        segment and can inject new packets.
@@ -870,7 +874,31 @@ Internet-Draft                    LOOPS                     October 2019
    guesses will sometimes hit, though, so the protocol needs to be
    robust to such injection attacks. ... (TBD)
 
-9.  Informative References
+9.  References
+
+9.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+
+
+
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 16]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
+9.2.  Informative References
 
    [RFC1982]  Elz, R. and R. Bush, "Serial Number Arithmetic", RFC 1982,
               DOI 10.17487/RFC1982, August 1996,
@@ -887,16 +915,6 @@ Internet-Draft                    LOOPS                     October 2019
               Correction (FEC) Building Block", RFC 5052,
               DOI 10.17487/RFC5052, August 2007,
               <https://www.rfc-editor.org/info/rfc5052>.
-
-
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 16]
-
-Internet-Draft                    LOOPS                     October 2019
-
 
    [RFC5862]  Yasukawa, S. and A. Farrel, "Path Computation Clients
               (PCC) - Path Computation Element (PCE) Requirements for
@@ -929,6 +947,13 @@ Internet-Draft                    LOOPS                     October 2019
               a time-based fast loss detection algorithm for TCP",
               draft-ietf-tcpm-rack-05 (work in progress), April 2019.
 
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 17]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
    [I-D.ietf-nvo3-geneve]
               Gross, J., Ganga, I., and T. Sridhar, "Geneve: Generic
               Network Virtualization Encapsulation", draft-ietf-
@@ -945,14 +970,6 @@ Internet-Draft                    LOOPS                     October 2019
               Statement and Opportunities for Network-Assisted
               Performance Enhancement", draft-li-tsvwg-loops-problem-
               opportunities-03 (work in progress), July 2019.
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 17]
-
-Internet-Draft                    LOOPS                     October 2019
-
 
    [I-D.ietf-tsvwg-tunnel-congestion-feedback]
               Wei, X., Yizhou, L., Boutros, S., and L. Geng, "Tunnel
@@ -984,6 +1001,15 @@ Appendix A.  Protocol used in Prototype Implementation
       a packet is retransmitted by LOOPS, the retransmission uses the
       original PSN.
 
+
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 18]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
    o  Timestamp (32 bits): Information, in a format local to the LOOPS
       ingress, that provides the time when the packet was sent.  In the
       current implementation, a 32-bit unsigned value specifying the
@@ -1000,15 +1026,6 @@ Appendix A.  Protocol used in Prototype Implementation
       Appendix A.1 gives more details on FEC.
 
    The reverse information includes:
-
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 18]
-
-Internet-Draft                    LOOPS                     October 2019
-
 
    o  ACK Number (32 bits): The largest (in sequence number arithmetic
       [RFC1982]) PSN received so far.
@@ -1041,6 +1058,14 @@ A.1.  Block Code FEC
    encoding packet.  Both source packets and repair packets carry the
    FEC header information; the LOOPS Egress reconstructs the data
    packets from both kinds of packets.  The LOOPS Egress currently
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 19]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
    resequences the forwarded and reconstructed packets, so they are
    passed on in-order when the lost packets are recoverable within the
    source block.
@@ -1059,18 +1084,43 @@ Appendix B.  Transparent mode
    forward transmission of data packets, but runs on the side exchanging
    additional information.
 
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 19]
-
-Internet-Draft                    LOOPS                     October 2019
-
-
    An implementation could be based on conventional forwarding switches
    that just provide a copy of the ingress and egress packet stream to
    the LOOPS implementations.  The LOOPS process would occasionally
    inject recovered packets back into the LOOPS egress node's forwarding
    switch, see Figure 3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 20]
+
+Internet-Draft                    LOOPS                     October 2019
+
 
               |
       +-------+-------------------------------------------+
@@ -1115,17 +1165,18 @@ B.1.  Packet identification
    packet identification should not make mistakes (as these would lead
    to faultily reconstructed packets).
 
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 20]
-
-Internet-Draft                    LOOPS                     October 2019
-
-
    In Retransmission mode, misidentification of a packet could lead to
    measurement errors as well as missed retransmission opportunities.
    The latter will be fixed end-to-end.  The tolerance for measurement
    errors would influence the degree of accuracy that is aimed for.
+
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 21]
+
+Internet-Draft                    LOOPS                     October 2019
+
 
    Packet identification can be based on a cryptographic hash of the
    packet, computed in LOOPS ingress and egress using the same algorithm
@@ -1170,19 +1221,18 @@ B.3.  A hybrid mode
    Figure 3 can be modified by including a GRE encapsulator into the top
    left corner and a GRE decapsulator in the bottom left corner.  This
    provides more defined ingress and egress points, but it also provides
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 21]
-
-Internet-Draft                    LOOPS                     October 2019
-
-
    an opportunity to add a packet sequence number at the ingress.  The
    copies to the top right and bottom right corners are the encapsulated
    form, i.e., include the sequence number.
 
    The GRE packet header then has the form:
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 22]
+
+Internet-Draft                    LOOPS                     October 2019
+
 
       0                   1                   2                   3
       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -1200,39 +1250,6 @@ Internet-Draft                    LOOPS                     October 2019
    Rough ideas for both directions are given below in CDDL [RFC8610].
    This information set could be encoded in CBOR or in a bespoke
    encoding; details such as this can be defined later.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 22]
-
-Internet-Draft                    LOOPS                     October 2019
-
 
    forward-information = [
      [rel-psn, ack-desired, ? fec-info] /
@@ -1264,6 +1281,15 @@ Internet-Draft                    LOOPS                     October 2019
 
    If left out for a sequence number, the fec-info block is constructed
    by adding one to the previous one.  fec-repair-data contain repair
+
+
+
+
+Welzl & Bormann          Expires April 23, 2020                [Page 23]
+
+Internet-Draft                    LOOPS                     October 2019
+
+
    symbols for the sbn/esi given (which, again, are reconstructed from
    context if not given).
 
@@ -1281,14 +1307,6 @@ Internet-Draft                    LOOPS                     October 2019
    beyond it) is computed from the current PSN as set by rel-psn,
    rounded down to a multiple of 8, and adding 8*(end-psn-delta+1) to
    that value.
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 23]
-
-Internet-Draft                    LOOPS                     October 2019
-
 
 Acknowledgements
 
@@ -1323,22 +1341,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Welzl & Bormann          Expires April 16, 2020                [Page 24]
+Welzl & Bormann          Expires April 23, 2020                [Page 24]
