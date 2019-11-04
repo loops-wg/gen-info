@@ -15,7 +15,7 @@ pi:
 title: LOOPS Generic Information Set
 abbrev: LOOPS
 wg: TSVWG
-# date: 2019-10-21
+# date: 2019-11-04
 author:
 - name: Michael Welzl
   org: University of Oslo
@@ -38,7 +38,7 @@ author:
     role: editor
 
 informative:
-#  RFC0793: tcp
+  RFC0793: tcp
 #  RFC1122: hostcomm
   RFC1982: serial
 #  RFC3168: ecn
@@ -59,6 +59,16 @@ informative:
   I-D.ietf-intarea-gue: gue
   I-D.li-tsvwg-loops-problem-opportunities: LOOPS-prob-oppo
   I-D.ietf-tsvwg-tunnel-congestion-feedback: tunnel-congestion-feedback
+  I-D.bormann-loops-geneve-binding: geneve-binding
+  IEN74:
+    -: seq
+    title: Sequence Number Arithmetic
+    author:
+      name: William W. Plummer
+      org: BB&N Inc
+    date: September 1978
+    seriesinfo:
+      Internet Experiment Note: 74
 
 --- abstract
 
@@ -435,6 +445,7 @@ In the forward information, we have identified:
   transmitted by the LOOPS ingress (i.e., retransmissions re-use the PSN)
 - an “ACK desirable” flag (one bit, usually set for a certain
   percentage of the data packets only)
+- an optional blob, to be echoed by the egress
 - anything that the FEC scheme needs.
 
 The first four together (say, 3+24+4+1) might even fit into 32 bits,
@@ -463,11 +474,12 @@ ACK desired bit set only for original transmissions.
 For the reverse information, we have identified:
 
 - one optional block 1, possibly repeated:
- - PSN being acknowledged
- - absolute time of reception for the packet acknowledged (PSN)
+   - PSN being acknowledged
+   - absolute time of reception for the packet acknowledged (PSN)
+   - the blob, if present, echoed back
 - one optional block 2, possibly repeated:
- - an ACK bitmap (based on PSN), always starting at a multiple of 8
- - a delta indicating the end PSN of the bitmap (actually the first
+   - an ACK bitmap (based on PSN), always starting at a multiple of 8
+   - a delta indicating the end PSN of the bitmap (actually the first
    PSN that is beyond it), using (Acked-PSN & ~7) + 8*(delta+1) as the
    end of the bitmap.
    Acked-PSN in that formula is the previous block 1 PSN seen in this
@@ -510,17 +522,54 @@ Because of the short time that is usually set in the maximum latency
 increase, there is little damage from a collision of PSNs with
 packets still in flight from previous instances of LOOPS.
 
-Collisions can be minimized by assigning initial PSNs randomly, or
-using stable storage.  Random assignment is more useful for longer
-PSNs, where the likelihood of overlap will be low.  The specific way a
-LOOPS ingress uses stable storage is a local matter and thus out of
-scope.  (Implementation note: this can be made to work similar to
-secure nonce generation with write attenuation: Say, every 10000
-packets, the sender notes down the PSN into stable storage.  After a
-reboot, it reloads the PSN and adds 10000 in sequence number
+### Minimizing collisions
+
+If desired, collisions can be minimized by assigning initial PSNs
+randomly, or using stable storage.  Random assignment is more useful
+for longer PSNs, where the likelihood of overlap will be low.  The
+specific way a LOOPS ingress uses stable storage is a local matter and
+thus out of scope.  (Implementation note: this can be made to work
+similar to secure nonce generation with write attenuation: Say, every
+10000 packets, the sender notes down the PSN into stable storage.
+After a reboot, it reloads the PSN and adds 10000 in sequence number
 arithmetic {{-serial}}, plus maybe another 10000 so the sender does
 not have to wait for the store operation to succeed before sending
 more packets.)
+
+### Optional Initial PSN procedure
+
+As a potential option (to be discussed), an initial packet sequence
+number could be communicated using a simple two-bit protocol, based on
+an I flag (Initial PSN) carried in the forward information and an R
+flag (Initial PSN Received) in the reverse information.  This
+procedure essentially clears the egress of any previous state,
+however, the benefits of this procedure are limited.
+
+The initial PSN is assigned unilaterally by the LOOPS ingress,
+selected randomly.
+The ingress will keep setting the I flag to one when it
+starts to send packets from a new beginning or whenever it believes there is
+a need to notify the egress about a new initial PSN.
+The ingress will stop setting the I flag when it receives an
+acknowledgement with the R flag set from the egress.
+
+When the LOOPS egress receives a packets with the I flag set, it stops
+performing services that assume a sequential PSN.  The egress will no
+longer provide acknowledgement information for the packets with PSN
+smaller than this new initial PSN (per sequence number arithmetic
+{{-seq}}).  The egress sends acknowledgement information back without
+any delay by echoing the value of the I flag in the R flag.  This also
+means the egress unsets the R flag in subsequent acknowledgements for
+packets with the I flag unset.
+
+It may happen that the first few packets are lost in an initial PSN
+assignment process. In this case, the loss of these packets is not
+detectable by the LOOPS ingress since the first received PSN will be
+treated as an initial PSN at the egress.  This is an acceptable
+temporary performance degradation: LOOPS does not intend to provide
+perfect reliability, and LOOPS usually applies to the aggregated
+traffic over a tunnel so that the initial PSN assignment happens
+infrequently.
 
 
 ## Acknowledgement Generation
@@ -532,7 +581,7 @@ acknowledgement.  This means that the LOOPS ingress gets to modulate
 the number of acknowledgement sent by the LOOPS egress.  However,
 whenever an out-of-order packet arrives while there still are "holes"
 in the PSNs received, the LOOPS receiver should generate a block 2
-acknowledgement immediately that the LOOPS sender can use as a NACK list.
+acknowledgement immediately that the LOOPS sender can use as an ACK list.
 
 Reverse information can be piggybacked in a reverse direction data packet.
 When the reverse direction has no user data to be sent, a pure reverse
@@ -572,6 +621,56 @@ ingress may send keepalive packets, which are discarded at the LOOPS
 egress after sending acknowledgements.  The indication that a packet
 is a keepalive packet is dependent on the encapsulation protocol.
 
+### Ingress-relative timestamps
+
+As an optional procedure, the ingress node can attach a small blob of
+data to a forward packet that carries an ACK desired flag; this blob
+is then echoed by the egress in its block 1 acknowledgement.
+This is typically used to attach a timestamp on a time scale defined
+by the ingress; we speak of an ingress-relative timestamp.
+Alternatively, the ingress can keep a timestamp in its local storage,
+associated with the PSN of the packet that carries an ACK desired
+flag; it can then retrieve this timestamp when the block 1
+acknowledgement arrives.
+
+In either case, the LOOPS ingress keeps track of the local segment
+round trip time (LRTT) based on the (saved or received) timestamp and
+the arrival time of the block 1 acknowledgement, by setting the ACK
+Desired flag (D flag) occasionally (several times per RTT) and
+saving/including a sending timestamp for/in the packet.
+
+As the egress will send block 1 acknowledgement information right away
+when it receives a packet with the D flag set, the measurement of LRTT
+is more accurate for such packets.
+A smoothed local segment round trip time S_LRTT can be computed in a
+similar way as defined by {{RFC0793}}. A recent minimum value of LRTT
+is also kept as min_LRTT.  S_LRTT is used as a basis for the overall
+timing of retransmission and state management.
+
+Retransmitted packets MUST NOT be used for local segment round trip
+time (LRTT) calculation.
+
+### ACK generation
+
+A block 1 acknowledgement is generated based on receiving a forward
+packet with a D flag.
+
+The way block 2 acknowledgement information is sent is more subject to
+control by the egress.  Generally, the egress will aggregate ACK
+bits for at least K packets before sending a block 2; this can be used
+to amortize the overhead to close to a couple of bits per ACK.  In
+order to counter loss of reverse information packets, an egress will
+also want to send an ACK bit more than once --- a saturation value of
+3 or more may be chosen based on setup information.  Typically, ACK
+bits already sent will be prepended to ACK bits that are new in this
+block 2 information set.
+If K packets do not accumulate for a while, the egress will send one
+or more packets with block 2 information that covers the unsent ACK
+bits it has so far.
+
+(Discussion: This works best if the egress has information both about
+the S_RTT and min_RTT that the ingress uses and the reverse packet
+loss rate.)
 
 ## Loss detection and Recovery
 
@@ -580,16 +679,16 @@ There are two ways for LOOPS local recovery, retransmission and FEC.
 ### Local Retransmission
 
 When retransmission is used as recovery mechanism, the LOOPS ingress
-detects a packet loss by receiving a NACK or by local timeout (using a
-RTO value that might be calculated as in {{-rto}}).
-It might employ a DUPACK-like or a RACK-like mechanism for delayed
-reaction to a NACK.
+detects a packet loss by not receiving an ACK for the packet within
+the time expected based on an RTO value (which might be calculated as
+in {{-rto}}).  Packet retransmission should then not be performed more
+than once within an LRTT.
 
 When a retransmission is desired (see {{sec-cc}} for why it might not
 be), the LOOPS ingress performs the local in-network recovery by
-retransmitting the packet.  Further retransmissions may be desirable if
-the NACK is persistent beyond an RTO, as long as the maximum latency
-increase is not reached.
+retransmitting the packet.  Further retransmissions may be desirable
+if the lack of ACK is persistent beyond an RTO, as long as the maximum
+latency increase is not reached.
 
 
 ### FEC
@@ -642,24 +741,11 @@ which can embed LOOPS functions. Geneve uses TLVs to carry optional
 information between NVEs.  NVE is logically the same entity as the
 LOOPS node.
 
-For Geneve, a new LOOPS TLV needs to be defined and its format needs
-to be consistent with LOOPS generic information in {{sec-model}}.
-When the Geneve LOOPS TLV is put in forward information, NVEs should
-be able to process it.  Any settings needed can be provided in the
-Setup Information.
+The Geneve header has a mandatory Virtual Network Identifier (VNI)
+field. The specific VNI value to be used is part of the setup
+information for the LOOPS tunnel.
 
-In the reverse direction, when no data packets are available for
-piggybacking, a control only packet will be used to carry the LOOPS
-reverse information. Such a control only packet sets the 'O' bit in
-the Geneve header and has no real user data.
-
-VNI is a mandatory field in Geneve base header. The LOOPS TLV should
-function on the tunnel between two NVEs without looking at the VNI
-value.  The LOOPS PSN number space is local to the overlay tunnel
-regardless of the VNI inside.  At the ingress NVE, there are different
-ways to decide whether a packet should go to LOOPS enabled tunnel,
-e.g. by protocol number (TCP/UDP certain ports) or by VNI.
-
+More details for a Geneve binding for LOOPS can be found in {{-geneve-binding}}.
 
 ## Embedding LOOPS in GUE {#sec-gue}
 
@@ -741,11 +827,11 @@ three classes of attackers:
 ## Discussion
 
 Class 2 attackers can see e.g. sequence numbers and can inject, but
-not modify traffic.  Attacks might include injecting NACKs, initial
+not modify traffic.  Attacks might include injecting false ACKs, initial
 PSN flags, ... (TBD)
 
 Class 3 (“blind”) attackers might still be able to fake initial PSN
-bits + NACKs, but will have a harder time otherwise as it would need
+bits + false ACKs, but will have a harder time otherwise as it would need
 to guess the PSN range in which it can wreak havoc.  Even random
 guesses will sometimes hit, though, so the protocol needs to be robust
 to such injection attacks. ... (TBD)
@@ -796,7 +882,7 @@ The reverse information includes:
 - ACK Number (32 bits): The largest (in sequence number arithmetic
   {{-serial}}) PSN received so far.
 
-- NACK List (variable): This indicates an array of PSN numbers to
+- ACK List (variable): This indicates an array of PSN numbers to
   describe the PSN "holes" preceding the ACK number. It conceptually
   lists the PSNs of every packet perceived as lost by the LOOPS
   egress.  In actual use, it is truncated.
@@ -1027,7 +1113,7 @@ Michael Welzl has been supported by the Research Council of Norway under its “
 
 <!--  LocalWords:  timestamp acknowledgement PSN ONs retransmit ACK
  -->
-<!--  LocalWords:  NACK RTT timestamps retransmitted acknowledgements
+<!--  LocalWords:  RTT timestamps retransmitted acknowledgements
  -->
 <!--  LocalWords:  codepoint Geneve TLVs codepoints resequencing
  -->
