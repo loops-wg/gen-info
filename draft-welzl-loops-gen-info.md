@@ -15,7 +15,7 @@ pi:
 title: LOOPS Generic Information Set
 abbrev: LOOPS
 wg: TSVWG
-# date: 2019-11-04
+# date: 2020-02-24
 author:
 - name: Michael Welzl
   org: University of Oslo
@@ -412,6 +412,48 @@ parameters) by some control plane mechanism that is out of scope for
 this specification.  This means there is no need in the LOOPS protocol
 itself to manage setup information.
 
+# LOOPS Architecture
+
+From the above, the following architecture is derived for LOOPS.
+
+LOOPS governs the segment from an ingress node to an egress node,
+which is part of one or more end-to-end paths.
+Often, a LOOPS segment will operate on aggregate traffic from many
+such end-to-end paths.
+
+The LOOPS protocol itself does not define how a LOOPS segment and the
+protocol entities in the ingress and egress node are set up.  We
+expect that a *setup protocol* on the control plane will provide some
+*setup information* to the two nodes, including when to start and to
+tear down processing.
+
+Each LOOPS segment governs traffic on one direction in the segment.
+The LOOPS ingress adds *forward information* to that traffic; the
+LOOPS egress removes the forward information and sends some *reverse
+information* to inform the behavior of the ingress.
+
+Hence, in the data plane, forward information is added to each data
+packet.  Reverse information can be sent in separate packets (e.g.,
+Geneve control-only packets {{-geneve}}) and/or piggybacked on a
+related, reverse-direction LOOPS flow, similar to the way the the
+forward information for that flow is carried.  The setup protocol is
+used to provide the relationship between the LOOPS segments in the two
+directions that is used for piggybacking reverse information.
+
+The above describes the "tunnel mode".  A transparent mode is
+described in {{sec-trans}}, which does not modify the data packets and
+therefore needs to send forward information in separate packets,
+usually aggregated.
+
+The LOOPS *generic information set* defines what information is provided
+as setup information, forward information, and reverse information.
+*Bindings* map this information set to specific control plane and data
+plane protocols, including defining the specific encoding being used.
+Where separate packets (outside the data plane protocols being used)
+need to be sent, a special UDP-based protocol needs to be defined as
+well.  The various bindings aim for some commonality, so that an
+implementation for multiple bindings does not need to support
+gratuitous variety between them.
 
 # LOOPS Generic Information Set {#sec-model}
 
@@ -429,12 +471,6 @@ Setup Information might include:
 - target maximum latency increase caused by the operation of LOOPS on
   this segment
 - maximum retransmission count (*)
-
-In the data plane, we have forward information (information added to
-each data packet) and reverse information.
-The latter can be sent in
-separate packets (e.g., Geneve control-only packets {{-geneve}}) and/or
-piggybacked like the forward information.
 
 ## Forward Information
 
