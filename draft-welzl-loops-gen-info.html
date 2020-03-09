@@ -328,14 +328,14 @@ ul.toc li {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.37.3 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.40.1 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Welzl, M. and C. Bormann, Ed." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-welzl-loops-gen-info-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2020-02-24" />
-  <meta name="dct.abstract" content="LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.   provides an overview over the problems and optimization opportunities that LOOPS could address.The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format.The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE  and Geneve ." />
-  <meta name="description" content="LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.   provides an overview over the problems and optimization opportunities that LOOPS could address.The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format.The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE  and Geneve ." />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-03-09" />
+  <meta name="dct.abstract" content="LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.   provides an overview over the problems and optimization opportunities that LOOPS could address. The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format. The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE  and Geneve . " />
+  <meta name="description" content="LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.   provides an overview over the problems and optimization opportunities that LOOPS could address. The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format. The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE  and Geneve . " />
 
 </head>
 
@@ -357,12 +357,12 @@ ul.toc li {
 <td class="right">C. Bormann, Ed.</td>
 </tr>
 <tr>
-<td class="left">Expires: August 27, 2020</td>
+<td class="left">Expires: September 10, 2020</td>
 <td class="right">Universit&#228;t Bremen TZI</td>
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">February 24, 2020</td>
+<td class="right">March 09, 2020</td>
 </tr>
 
     	
@@ -380,7 +380,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 27, 2020.</p>
+<p>This Internet-Draft will expire on September 10, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -586,7 +586,7 @@ ul.toc li {
 <p id="rfc.section.2.4.p.1">Congestion control at the end-to-end sender is used to adapt its sending rate to the network congestion status.  In typical TCP senders, packet loss implies congestion and leads to a reduction in sending rate.  With LOOPS operating, packet loss can be masked from the sender as the loss may have been locally recovered.  In this case, rate reduction may not be invoked at the sender.  This is a desirable performance improvement if the loss was a random loss.</p>
 <p id="rfc.section.2.4.p.2">If LOOPS successfully conceals congestion losses from the end-to-end transport protocol, that might increase the rate to a level that congests the LOOPS segment, or that causes excessive queueing at the LOOPS ingress.  What LOOPS should be able to achieve is to let the end host sender invoke the rate reduction mechanism when there is a congestion loss no matter if the lost packet was recovered locally.</p>
 <p id="rfc.section.2.4.p.3">As with any tunneling protocol, information about congestion events inside the tunnel needs to be exported to the end-to-end path the tunnel is part of.  See e.g., <a href="#RFC6040" class="xref">[RFC6040]</a> for a discussion of how to do this in the presence of ECN.  A more recent draft, <a href="#I-D.ietf-tsvwg-tunnel-congestion-feedback" class="xref">[I-D.ietf-tsvwg-tunnel-congestion-feedback]</a>, proposes to activate ECN for the tunnel regardless of whether the end-to-end protocol signals the use of an ECN-capable transport (ECT), which requires more complicated action at the tunnel egress.</p>
-<p id="rfc.section.2.4.p.4">A sender that interprets reordering as a signal of packet loss (DUPACKs) initiates a retransmission and reduces the sending rate.  When spurious retransmission detection (e.g., via F-RTO <a href="#RFC5862" class="xref">[RFC5862]</a> or DSACK <a href="#RFC3708" class="xref">[RFC3708]</a> is enabled by the TCP sender, it will often be able undo the unnecessary window reduction.  As LOOPS recovers lost packets locally, in most cases the end host sender will eventually find out its reordering-based retransmission (if any) is spurious.  This is an appropriate performance improvement if the loss was a random loss.  For congestion losses, a congestion event needs to be signaled to the end-to-end transport.</p>
+<p id="rfc.section.2.4.p.4">A sender that interprets reordering as a signal of packet loss (DUPACKs) initiates a retransmission and reduces the sending rate.  When spurious retransmission detection (e.g., via F-RTO <a href="#RFC5862" class="xref">[RFC5862]</a> or DSACK <a href="#RFC3708" class="xref">[RFC3708]</a>) is enabled by the TCP sender, it will often be able undo the unnecessary window reduction.  As LOOPS recovers lost packets locally, in most cases the end host sender will eventually find out its reordering-based retransmission (if any) is spurious.  This is an appropriate performance improvement if the loss was a random loss.  For congestion losses, a congestion event needs to be signaled to the end-to-end transport.</p>
 <p id="rfc.section.2.4.p.5">If the end-to-end transport is ECN-capable (which is visible at the IP level), congestion loss events can easily be signaled to them by setting the CE (congestion experienced) mark.  If LOOPS detects a congestion loss for a non-ECT packet, it needs to signal a congestion loss event by introducing a packet loss.  This can be done by choosing not to retransmit or repair the packet loss locally in this case.  Note that one congestion loss per end-to-end RTT is sufficient to provide the rate reduction, so LOOPS may still be able to recover most packets, in particular for burst losses.  (As LOOPS does not interact with the end-to-end transport, it does not know the end-to-end RTT.  Some lower bound derived from configuration and measurements could be used instead.)</p>
 <h1 id="rfc.section.2.5">
 <a href="#rfc.section.2.5">2.5.</a> <a href="#congestion-detection" id="congestion-detection">Congestion Detection</a>
@@ -608,8 +608,8 @@ ul.toc li {
 <p id="rfc.section.4.p.2">LOOPS governs the segment from an ingress node to an egress node, which is part of one or more end-to-end paths.  Often, a LOOPS segment will operate on aggregate traffic from many such end-to-end paths.</p>
 <p id="rfc.section.4.p.3">The LOOPS protocol itself does not define how a LOOPS segment and the protocol entities in the ingress and egress node are set up.  We expect that a <em>setup protocol</em> on the control plane will provide some <em>setup information</em> to the two nodes, including when to start and to tear down processing.</p>
 <p id="rfc.section.4.p.4">Each LOOPS segment governs traffic on one direction in the segment.  The LOOPS ingress adds <em>forward information</em> to that traffic; the LOOPS egress removes the forward information and sends some <em>reverse information</em> to inform the behavior of the ingress.</p>
-<p id="rfc.section.4.p.5">Hence, in the data plane, forward information is added to each data packet.  Reverse information can be sent in separate packets (e.g., Geneve control-only packets <a href="#I-D.ietf-nvo3-geneve" class="xref">[I-D.ietf-nvo3-geneve]</a>) and/or piggybacked on a related, reverse-direction LOOPS flow, similar to the way the the forward information for that flow is carried.  The setup protocol is used to provide the relationship between the LOOPS segments in the two directions that is used for piggybacking reverse information.</p>
-<p id="rfc.section.4.p.6">The above describes the &#8220;tunnel mode&#8221;.  A transparent mode is described in <a href="#sec-trans" class="xref">Appendix B</a>, which does not modify the data packets and therefore needs to send forward information in separate packets, usually aggregated.</p>
+<p id="rfc.section.4.p.5">Hence, in the data plane, forward information is added to each data packet.  Reverse information can be sent in separate packets (e.g., Geneve control-only packets <a href="#I-D.ietf-nvo3-geneve" class="xref">[I-D.ietf-nvo3-geneve]</a>) and/or piggybacked on a related, reverse-direction LOOPS flow, similar to the way the forward information for that flow is carried.  The setup protocol is used to provide the relationship between the LOOPS segments in the two directions that is used for piggybacking reverse information.</p>
+<p id="rfc.section.4.p.6">The above describes the &#8220;tunnel mode&#8221;.  A transparent mode is described in <a href="#sec-trans" class="xref">Appendix B</a>, which does not modify the data packets and therefore needs to send any forward information (if needed, for FEC) in separate packets, usually aggregated.</p>
 <p id="rfc.section.4.p.7">The LOOPS <em>generic information set</em> defines what information is provided as setup information, forward information, and reverse information.  <em>Bindings</em> map this information set to specific control plane and data plane protocols, including defining the specific encoding being used.  Where separate packets (outside the data plane protocols being used) need to be sent, a special UDP-based protocol needs to be defined as well.  The various bindings aim for some commonality, so that an implementation for multiple bindings does not need to support gratuitous variety between them.</p>
 <h1 id="rfc.section.5">
 <a href="#rfc.section.5">5.</a> <a href="#sec-model" id="sec-model">LOOPS Generic Information Set</a>
@@ -846,7 +846,7 @@ ul.toc li {
 <tr>
 <td class="reference"><b id="I-D.ietf-nvo3-geneve">[I-D.ietf-nvo3-geneve]</b></td>
 <td class="top">
-<a>Gross, J.</a>, <a>Ganga, I.</a> and <a>T. Sridhar</a>, "<a href="https://tools.ietf.org/html/draft-ietf-nvo3-geneve-14">Geneve: Generic Network Virtualization Encapsulation</a>", Internet-Draft draft-ietf-nvo3-geneve-14, September 2019.</td>
+<a>Gross, J.</a>, <a>Ganga, I.</a> and <a>T. Sridhar</a>, "<a href="https://tools.ietf.org/html/draft-ietf-nvo3-geneve-16">Geneve: Generic Network Virtualization Encapsulation</a>", Internet-Draft draft-ietf-nvo3-geneve-16, March 2020.</td>
 </tr>
 <tr>
 <td class="reference"><b id="I-D.ietf-intarea-gue">[I-D.ietf-intarea-gue]</b></td>

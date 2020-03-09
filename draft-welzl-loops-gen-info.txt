@@ -5,8 +5,8 @@
 TSVWG                                                           M. Welzl
 Internet-Draft                                        University of Oslo
 Intended status: Standards Track                         C. Bormann, Ed.
-Expires: August 27, 2020                         Universitaet Bremen TZI
-                                                       February 24, 2020
+Expires: September 10, 2020                      Universitaet Bremen TZI
+                                                          March 09, 2020
 
 
                      LOOPS Generic Information Set
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 27, 2020.
+   This Internet-Draft will expire on September 10, 2020.
 
 
 
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 1]
+Welzl & Bormann        Expires September 10, 2020               [Page 1]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 2]
+Welzl & Bormann        Expires September 10, 2020               [Page 2]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
      9.1.  Threat model  . . . . . . . . . . . . . . . . . . . . . .  18
@@ -165,9 +165,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 3]
+Welzl & Bormann        Expires September 10, 2020               [Page 3]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    LOOPS information is added as part of a tunnel protocol header at the
@@ -221,9 +221,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 4]
+Welzl & Bormann        Expires September 10, 2020               [Page 4]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
 1.1.  Terminology
@@ -277,9 +277,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 5]
+Welzl & Bormann        Expires September 10, 2020               [Page 5]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    Receiver:  Ultimate receiver of a packet on an end-to-end path that
@@ -333,9 +333,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 6]
+Welzl & Bormann        Expires September 10, 2020               [Page 6]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    [I-D.ietf-tcpm-rack].  This requires a limit on the additional
@@ -374,7 +374,7 @@ Internet-Draft                    LOOPS                    February 2020
    A sender that interprets reordering as a signal of packet loss
    (DUPACKs) initiates a retransmission and reduces the sending rate.
    When spurious retransmission detection (e.g., via F-RTO [RFC5862] or
-   DSACK [RFC3708] is enabled by the TCP sender, it will often be able
+   DSACK [RFC3708]) is enabled by the TCP sender, it will often be able
    undo the unnecessary window reduction.  As LOOPS recovers lost
    packets locally, in most cases the end host sender will eventually
    find out its reordering-based retransmission (if any) is spurious.
@@ -389,9 +389,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 7]
+Welzl & Bormann        Expires September 10, 2020               [Page 7]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    loss event by introducing a packet loss.  This can be done by
@@ -445,9 +445,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 8]
+Welzl & Bormann        Expires September 10, 2020               [Page 8]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    path.  For instance, cooperating LOOPS segments could try to divide
@@ -488,22 +488,22 @@ Internet-Draft                    LOOPS                    February 2020
    packet.  Reverse information can be sent in separate packets (e.g.,
    Geneve control-only packets [I-D.ietf-nvo3-geneve]) and/or
    piggybacked on a related, reverse-direction LOOPS flow, similar to
-   the way the the forward information for that flow is carried.  The
-   setup protocol is used to provide the relationship between the LOOPS
+   the way the forward information for that flow is carried.  The setup
+   protocol is used to provide the relationship between the LOOPS
    segments in the two directions that is used for piggybacking reverse
    information.
 
    The above describes the "tunnel mode".  A transparent mode is
    described in Appendix B, which does not modify the data packets and
-   therefore needs to send forward information in separate packets,
-   usually aggregated.
+   therefore needs to send any forward information (if needed, for FEC)
+   in separate packets, usually aggregated.
 
 
 
 
-Welzl & Bormann          Expires August 27, 2020                [Page 9]
+Welzl & Bormann        Expires September 10, 2020               [Page 9]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    The LOOPS _generic information set_ defines what information is
@@ -557,9 +557,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 10]
+Welzl & Bormann        Expires September 10, 2020              [Page 10]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    The first four together (say, 3+24+4+1) might even fit into 32 bits,
@@ -613,9 +613,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 11]
+Welzl & Bormann        Expires September 10, 2020              [Page 11]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    deltas).  Upon reception of a block 1 ACK, it can then subtract that
@@ -669,9 +669,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 12]
+Welzl & Bormann        Expires September 10, 2020              [Page 12]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    when it starts to send packets from a new beginning or whenever it
@@ -725,9 +725,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 13]
+Welzl & Bormann        Expires September 10, 2020              [Page 13]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    alternative design, the forward information could include the
@@ -781,9 +781,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 14]
+Welzl & Bormann        Expires September 10, 2020              [Page 14]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    S_LRTT is used as a basis for the overall timing of retransmission
@@ -837,9 +837,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 15]
+Welzl & Bormann        Expires September 10, 2020              [Page 15]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
 6.4.2.  FEC
@@ -893,9 +893,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 16]
+Welzl & Bormann        Expires September 10, 2020              [Page 16]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
 7.1.  Embedding LOOPS in Geneve
@@ -949,9 +949,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 17]
+Welzl & Bormann        Expires September 10, 2020              [Page 17]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    combination.  The following discussion aims at discussing security
@@ -1005,9 +1005,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 18]
+Welzl & Bormann        Expires September 10, 2020              [Page 18]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
 9.2.  Discussion
@@ -1061,9 +1061,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 19]
+Welzl & Bormann        Expires September 10, 2020              [Page 19]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    [RFC5862]  Yasukawa, S. and A. Farrel, "Path Computation Clients
@@ -1100,7 +1100,7 @@ Internet-Draft                    LOOPS                    February 2020
    [I-D.ietf-nvo3-geneve]
               Gross, J., Ganga, I., and T. Sridhar, "Geneve: Generic
               Network Virtualization Encapsulation", draft-ietf-
-              nvo3-geneve-14 (work in progress), September 2019.
+              nvo3-geneve-16 (work in progress), March 2020.
 
    [I-D.ietf-intarea-gue]
               Herbert, T., Yong, L., and O. Zia, "Generic UDP
@@ -1117,9 +1117,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 20]
+Welzl & Bormann        Expires September 10, 2020              [Page 20]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    [I-D.ietf-tsvwg-tunnel-congestion-feedback]
@@ -1173,9 +1173,9 @@ Appendix A.  Protocol used in Prototype Implementation
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 21]
+Welzl & Bormann        Expires September 10, 2020              [Page 21]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
       includes the Source Block Number (SBN), Encoding Symbol ID (ESI),
@@ -1229,9 +1229,9 @@ A.1.  Block Code FEC
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 22]
+Welzl & Bormann        Expires September 10, 2020              [Page 22]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
 Appendix B.  Transparent mode
@@ -1285,9 +1285,9 @@ Appendix B.  Transparent mode
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 23]
+Welzl & Bormann        Expires September 10, 2020              [Page 23]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    mode.  Any forward information beyond the data packets is sent in
@@ -1341,9 +1341,9 @@ B.1.  Packet identification
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 24]
+Welzl & Bormann        Expires September 10, 2020              [Page 24]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
 B.2.  Generic information and protocol operation
@@ -1397,9 +1397,9 @@ B.3.  A hybrid mode
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 25]
+Welzl & Bormann        Expires September 10, 2020              [Page 25]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
    forward-information = [
@@ -1453,9 +1453,9 @@ Internet-Draft                    LOOPS                    February 2020
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 26]
+Welzl & Bormann        Expires September 10, 2020              [Page 26]
 
-Internet-Draft                    LOOPS                    February 2020
+Internet-Draft                    LOOPS                       March 2020
 
 
 Acknowledgements
@@ -1509,4 +1509,4 @@ Authors' Addresses
 
 
 
-Welzl & Bormann          Expires August 27, 2020               [Page 27]
+Welzl & Bormann        Expires September 10, 2020              [Page 27]
