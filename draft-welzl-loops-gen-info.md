@@ -60,6 +60,7 @@ informative:
   I-D.li-tsvwg-loops-problem-opportunities: LOOPS-prob-oppo
   I-D.ietf-tsvwg-tunnel-congestion-feedback: tunnel-congestion-feedback
   I-D.bormann-loops-geneve-binding: geneve-binding
+  I-D.wang-loops-srv6-binding: srv6-binding
   IEN74:
     -: seq
     title: Sequence Number Arithmetic
@@ -442,7 +443,7 @@ directions that is used for piggybacking reverse information.
 
 The above describes the "tunnel mode".  A transparent mode is
 described in {{sec-trans}}, which does not modify the data packets and
-therefore needs to send any forward information (if needed, for FEC) in
+therefore needs to send any forward information (if needed, e.g., for FEC) in
 separate packets, usually aggregated.
 
 The LOOPS *generic information set* defines what information is provided
@@ -799,6 +800,9 @@ contains a control message type when C bit is set.  Hence a new
 control message type should be defined for such LOOPS reverse
 information.
 
+## Embedding LOOPS in SRv6 {#sec-srv6}
+
+An SRv6 binding for LOOPS is proposed in {{-srv6-binding}}.
 
 # IANA Considerations
 
