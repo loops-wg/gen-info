@@ -325,7 +325,7 @@ action at the tunnel egress.
 
 A sender that interprets reordering as a signal of packet loss
 (DUPACKs) initiates a retransmission and reduces the sending rate.
-When spurious retransmission detection (e.g., via F-RTO {{RFC5862}} or DSACK {{RFC3708}} is
+When spurious retransmission detection (e.g., via F-RTO {{RFC5862}} or DSACK {{RFC3708}}) is
 enabled by the TCP sender, it will often be able undo the unnecessary window
 reduction.  As LOOPS recovers lost packets locally, in most cases the
 end host sender will eventually find out its reordering-based
@@ -435,15 +435,15 @@ information* to inform the behavior of the ingress.
 Hence, in the data plane, forward information is added to each data
 packet.  Reverse information can be sent in separate packets (e.g.,
 Geneve control-only packets {{-geneve}}) and/or piggybacked on a
-related, reverse-direction LOOPS flow, similar to the way the the
+related, reverse-direction LOOPS flow, similar to the way the
 forward information for that flow is carried.  The setup protocol is
 used to provide the relationship between the LOOPS segments in the two
 directions that is used for piggybacking reverse information.
 
 The above describes the "tunnel mode".  A transparent mode is
 described in {{sec-trans}}, which does not modify the data packets and
-therefore needs to send forward information in separate packets,
-usually aggregated.
+therefore needs to send any forward information (if needed, for FEC) in
+separate packets, usually aggregated.
 
 The LOOPS *generic information set* defines what information is provided
 as setup information, forward information, and reverse information.
