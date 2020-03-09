@@ -1,0 +1,1079 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>LOOPS Generic Information Set</title>
+
+  
+<style type="text/css">/*<![CDATA[*/
+
+body {
+  font: 16px "Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  color: #333;
+  font-size-adjust: 0.5;
+  line-height: 24px;
+  margin: 75px auto;
+  max-width: 624px;
+  padding: 0 5px;
+}
+
+.title, .filename, h1, h2, h3, h4, h5 {
+  font: 16px "Roboto Condensed","Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  font-size-adjust: 0.5;
+  font-weight: bold;
+  color: #333;
+  line-height: 100%;
+  margin: 1.2em 0 0.3em;
+}
+.title, #rfc\.title h1 { font-size: 32px; }
+h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
+h3, section h4, h4, section h5 { font-size: 16px; }
+h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
+  color: #333;
+}
+
+table {
+  margin-left: 0em;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(2n+1) > td,
+tr:nth-child(2n+1) > th {
+  background-color: #f9f9f9;
+}
+td.reference {
+  max-width: 200px;
+  border-top: none;
+  padding-right: 1em;
+}
+.right {
+  text-align: right;
+}
+
+
+table.header, table#rfc\.headerblock {
+  width: 100%;
+}
+table.header td, table#rfc\.headerblock td {
+  border: none;
+  background-color: transparent;
+  color: black;
+  padding: 0;
+}
+.filename {
+  display: block;
+  color: rgb(119, 119, 119);
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 100%;
+  margin: 10px 0 32px;
+}
+#rfc\.abstract+p, #rfc\.abstract+p code, #rfc\.abstract+p samp, #rfc\.abstract+p tt {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+samp, tt, code, pre, span.tt {
+  font-size: 13.5px;
+  font-family: Consolas, monospace;
+  font-size-adjust: none;
+}
+pre {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 5px;
+}
+.figure, caption {
+  font-style: italic;
+  margin: 0 1.5em;
+  text-align: left;
+}
+
+address {
+  margin: 16px 2px;
+  line-height: 20px;
+}
+.vcard {
+  font-style: normal;
+}
+.vcardline {
+  display: block;
+}
+.vcardline .fn, address b {
+  font-weight: normal;
+}
+.vcardline .hidden {
+  display: none;
+}
+
+dl {
+  margin-left: 1em;
+}
+dl.dl-horizontal: {
+  margin-left: 0;
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.nohang > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .5em;
+}
+dl.compact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+ul.empty {
+  list-style-type: none;
+}
+ul.empty li {
+  margin-top: .5em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+hr.noprint {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #2a6496;
+}
+a[href]:hover {
+  background-color: #eee;
+}
+
+p, ol, ul, li {
+  padding: 0;
+}
+p {
+  margin: 0.5em 0;
+}
+ol, ul {
+  margin: 0.2em 0 0.2em 2em;
+}
+li {
+  margin: 0.2em 0;
+}
+address {
+  font-style: normal;
+}
+
+ul.toc ul {
+  margin: 0 0 0 2em;
+}
+ul.toc li {
+  list-style: none;
+  margin: 0;
+}
+
+@media screen and (min-width: 924px) {
+  body {
+    padding-right: 350px;
+  }
+  body>ul.toc, body>#rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    z-index: 1;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>#rfc\.toc {
+    top: 55px;
+  }
+  body>ul.toc {
+    top: 100px;
+  }
+
+  ul.toc {
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  ul.toc ul {
+    margin-left: 1.2em;
+  }
+}
+
+.github-fork-ribbon-wrapper {
+  display: none;
+}
+@media screen and (min-width: 800px) {
+  /* "Fork me on GitHub" CSS ribbon based on
+   * https://github.com/simonwhitaker/github-fork-ribbon-css
+   */
+  .github-fork-ribbon {
+    position: absolute;
+    padding: 2px 0;
+    background-color: #a00;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    pointer-events: auto;
+
+    top: 38px;
+    right: -45px;
+
+    transform: rotate(45deg);
+  }
+
+  .github-fork-ribbon a[href],
+  .github-fork-ribbon a[href]:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    width: 190px;
+    line-height: 18px;
+
+    display: inline-block;
+    padding: 2px 0;
+
+    border: 1.5px dotted #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .github-fork-ribbon-wrapper {
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    overflow: hidden;
+    top: 0; right: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .github-fork-ribbon-wrapper {
+    position: fixed;
+  }
+  /*]]>*/</style>
+  <meta name="viewport" content="initial-scale=1.0">
+
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
+<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Terminology">
+<link href="#rfc.section.2" rel="Chapter" title="2 Challenges">
+<link href="#rfc.section.2.1" rel="Chapter" title="2.1 No Access to End-to-End Transport Information">
+<link href="#rfc.section.2.2" rel="Chapter" title="2.2 Path Asymmetry">
+<link href="#rfc.section.2.3" rel="Chapter" title="2.3 Reordering vs. Spurious Retransmission">
+<link href="#rfc.section.2.4" rel="Chapter" title="2.4 Informing the End-to-End Transport">
+<link href="#rfc.section.2.5" rel="Chapter" title="2.5 Congestion Detection">
+<link href="#rfc.section.3" rel="Chapter" title="3 Simplifying assumptions">
+<link href="#rfc.section.4" rel="Chapter" title="4 LOOPS Architecture">
+<link href="#rfc.section.5" rel="Chapter" title="5 LOOPS Generic Information Set">
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Setup Information">
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Forward Information">
+<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Reverse Information">
+<link href="#rfc.section.6" rel="Chapter" title="6 LOOPS General Operation">
+<link href="#rfc.section.6.1" rel="Chapter" title="6.1 Initial Packet Sequence Number">
+<link href="#rfc.section.6.1.1" rel="Chapter" title="6.1.1 Minimizing collisions">
+<link href="#rfc.section.6.1.2" rel="Chapter" title="6.1.2 Optional Initial PSN procedure">
+<link href="#rfc.section.6.2" rel="Chapter" title="6.2 Acknowledgement Generation">
+<link href="#rfc.section.6.3" rel="Chapter" title="6.3 Measurement">
+<link href="#rfc.section.6.3.1" rel="Chapter" title="6.3.1 Ingress-relative timestamps">
+<link href="#rfc.section.6.3.2" rel="Chapter" title="6.3.2 ACK generation">
+<link href="#rfc.section.6.4" rel="Chapter" title="6.4 Loss detection and Recovery">
+<link href="#rfc.section.6.4.1" rel="Chapter" title="6.4.1 Local Retransmission">
+<link href="#rfc.section.6.4.2" rel="Chapter" title="6.4.2 FEC">
+<link href="#rfc.section.6.5" rel="Chapter" title="6.5 Discussion">
+<link href="#rfc.section.7" rel="Chapter" title="7 Sketches of Bindings to Tunnel Protocols">
+<link href="#rfc.section.7.1" rel="Chapter" title="7.1 Embedding LOOPS in Geneve">
+<link href="#rfc.section.7.2" rel="Chapter" title="7.2 Embedding LOOPS in GUE">
+<link href="#rfc.section.8" rel="Chapter" title="8 IANA Considerations">
+<link href="#rfc.section.9" rel="Chapter" title="9 Security Considerations">
+<link href="#rfc.section.9.1" rel="Chapter" title="9.1 Threat model">
+<link href="#rfc.section.9.2" rel="Chapter" title="9.2 Discussion">
+<link href="#rfc.references" rel="Chapter" title="10 References">
+<link href="#rfc.references.1" rel="Chapter" title="10.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="10.2 Informative References">
+<link href="#rfc.appendix.A" rel="Chapter" title="A Protocol used in Prototype Implementation">
+<link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 Block Code FEC">
+<link href="#rfc.appendix.B" rel="Chapter" title="B Transparent mode">
+<link href="#rfc.appendix.B.1" rel="Chapter" title="B.1 Packet identification">
+<link href="#rfc.appendix.B.2" rel="Chapter" title="B.2 Generic information and protocol operation">
+<link href="#rfc.appendix.B.3" rel="Chapter" title="B.3 A hybrid mode">
+<link href="#rfc.acknowledgements" rel="Chapter">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 2.40.1 - https://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Welzl, M. and C. Bormann, Ed." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-welzl-loops-gen-info-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2020-03-09" />
+  <meta name="dct.abstract" content="LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.   provides an overview over the problems and optimization opportunities that LOOPS could address. The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format. The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE  and Geneve . " />
+  <meta name="description" content="LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.   provides an overview over the problems and optimization opportunities that LOOPS could address. The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format. The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE  and Geneve . " />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left">TSVWG</td>
+<td class="right">M. Welzl</td>
+</tr>
+<tr>
+<td class="left">Internet-Draft</td>
+<td class="right">University of Oslo</td>
+</tr>
+<tr>
+<td class="left">Intended status: Standards Track</td>
+<td class="right">C. Bormann, Ed.</td>
+</tr>
+<tr>
+<td class="left">Expires: September 10, 2020</td>
+<td class="right">Universit&#228;t Bremen TZI</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">March 09, 2020</td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">LOOPS Generic Information Set<br />
+  <span class="filename">draft-welzl-loops-gen-info-latest</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery in the presence of losses.  <a href="#I-D.li-tsvwg-loops-problem-opportunities" class="xref">[I-D.li-tsvwg-loops-problem-opportunities]</a> provides an overview over the problems and optimization opportunities that LOOPS could address.</p>
+<p>The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol, without already defining a specific data packet format.</p>
+<p>The generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  The current version of this document contains sketches of bindings to GUE <a href="#I-D.ietf-intarea-gue" class="xref">[I-D.ietf-intarea-gue]</a> and Geneve <a href="#I-D.ietf-nvo3-geneve" class="xref">[I-D.ietf-nvo3-geneve]</a>.</p>
+<h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on September 10, 2020.</p>
+<h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
+<p>Copyright (c) 2020 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<ul><li>1.1.   <a href="#rfc.section.1.1">Terminology</a>
+</li>
+</ul><li>2.   <a href="#rfc.section.2">Challenges</a>
+</li>
+<ul><li>2.1.   <a href="#rfc.section.2.1">No Access to End-to-End Transport Information</a>
+</li>
+<li>2.2.   <a href="#rfc.section.2.2">Path Asymmetry</a>
+</li>
+<li>2.3.   <a href="#rfc.section.2.3">Reordering vs. Spurious Retransmission</a>
+</li>
+<li>2.4.   <a href="#rfc.section.2.4">Informing the End-to-End Transport</a>
+</li>
+<li>2.5.   <a href="#rfc.section.2.5">Congestion Detection</a>
+</li>
+</ul><li>3.   <a href="#rfc.section.3">Simplifying assumptions</a>
+</li>
+<li>4.   <a href="#rfc.section.4">LOOPS Architecture</a>
+</li>
+<li>5.   <a href="#rfc.section.5">LOOPS Generic Information Set</a>
+</li>
+<ul><li>5.1.   <a href="#rfc.section.5.1">Setup Information</a>
+</li>
+<li>5.2.   <a href="#rfc.section.5.2">Forward Information</a>
+</li>
+<li>5.3.   <a href="#rfc.section.5.3">Reverse Information</a>
+</li>
+</ul><li>6.   <a href="#rfc.section.6">LOOPS General Operation</a>
+</li>
+<ul><li>6.1.   <a href="#rfc.section.6.1">Initial Packet Sequence Number</a>
+</li>
+<ul><li>6.1.1.   <a href="#rfc.section.6.1.1">Minimizing collisions</a>
+</li>
+<li>6.1.2.   <a href="#rfc.section.6.1.2">Optional Initial PSN procedure</a>
+</li>
+</ul><li>6.2.   <a href="#rfc.section.6.2">Acknowledgement Generation</a>
+</li>
+<li>6.3.   <a href="#rfc.section.6.3">Measurement</a>
+</li>
+<ul><li>6.3.1.   <a href="#rfc.section.6.3.1">Ingress-relative timestamps</a>
+</li>
+<li>6.3.2.   <a href="#rfc.section.6.3.2">ACK generation</a>
+</li>
+</ul><li>6.4.   <a href="#rfc.section.6.4">Loss detection and Recovery</a>
+</li>
+<ul><li>6.4.1.   <a href="#rfc.section.6.4.1">Local Retransmission</a>
+</li>
+<li>6.4.2.   <a href="#rfc.section.6.4.2">FEC</a>
+</li>
+</ul><li>6.5.   <a href="#rfc.section.6.5">Discussion</a>
+</li>
+</ul><li>7.   <a href="#rfc.section.7">Sketches of Bindings to Tunnel Protocols</a>
+</li>
+<ul><li>7.1.   <a href="#rfc.section.7.1">Embedding LOOPS in Geneve</a>
+</li>
+<li>7.2.   <a href="#rfc.section.7.2">Embedding LOOPS in GUE</a>
+</li>
+</ul><li>8.   <a href="#rfc.section.8">IANA Considerations</a>
+</li>
+<li>9.   <a href="#rfc.section.9">Security Considerations</a>
+</li>
+<ul><li>9.1.   <a href="#rfc.section.9.1">Threat model</a>
+</li>
+<li>9.2.   <a href="#rfc.section.9.2">Discussion</a>
+</li>
+</ul><li>10.   <a href="#rfc.references">References</a>
+</li>
+<ul><li>10.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>10.2.   <a href="#rfc.references.2">Informative References</a>
+</li>
+</ul><li>Appendix A.   <a href="#rfc.appendix.A">Protocol used in Prototype Implementation</a>
+</li>
+<ul><li>A.1.   <a href="#rfc.appendix.A.1">Block Code FEC</a>
+</li>
+</ul><li>Appendix B.   <a href="#rfc.appendix.B">Transparent mode</a>
+</li>
+<ul><li>B.1.   <a href="#rfc.appendix.B.1">Packet identification</a>
+</li>
+<li>B.2.   <a href="#rfc.appendix.B.2">Generic information and protocol operation</a>
+</li>
+<li>B.3.   <a href="#rfc.appendix.B.3">A hybrid mode</a>
+</li>
+</ul><li><a href="#rfc.acknowledgements">Acknowledgements</a>
+</li>
+<li><a href="#rfc.authors">Authors' Addresses</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
+</h1>
+<p id="rfc.section.1.p.1">Today&#8217;s networks exhibit a wide variety of data rates and, relative to those, processing power and memory capacities of nodes acting as routers.  For instance, networks that employ tunneling to build overlay networks may position powerful virtual router nodes in the network to act as tunnel endpoints.  The capabilities available in the more powerful cases provide new opportunities for optimizations.</p>
+<p id="rfc.section.1.p.2">LOOPS (Local Optimizations on Path Segments) aims to provide local (not end-to-end but in-network) recovery of lost packets to achieve better data delivery.  <a href="#I-D.li-tsvwg-loops-problem-opportunities" class="xref">[I-D.li-tsvwg-loops-problem-opportunities]</a> provides an overview over the problems and optimization opportunities that LOOPS could address.  One simplifying assumption (<a href="#sec-simply" class="xref">Section 3</a>) in the present document is that LOOPS segments operate independently from each other, each as a pair of a LOOPS Ingress and a LOOPS Egress node.</p>
+<p id="rfc.section.1.p.3">The present document is a strawman for the set of information that would be interchanged in a LOOPS protocol between these nodes, without already defining a specific data packet format.  The main body of the document defines a mode of the LOOPS protocol that is based on traditional tunneling, the &#8220;tunnel mode&#8221;.  <a href="#sec-trans" class="xref">Appendix B</a> is an even rougher strawman of a radically different, alternative mode that we call &#8220;transparent mode&#8221;, as well as a slightly more conventional &#8220;hybrid mode&#8221; (<a href="#hybrid" class="xref">Appendix B.3</a>).  These different modes may be applicable to different usage scenarios and will be developed in parallel, with a view of ultimately standardizing one or more of them.</p>
+<p id="rfc.section.1.p.4">For tunnel mode, the generic information set needs to be mapped to a specific encapsulation protocol to actually run the LOOPS optimizations.  LOOPS is not tied to any specific overlay protocol, but is meant to run embedded into a variety of tunnel protocols.  LOOPS information is added as part of a tunnel protocol header at the LOOPS ingress as shown in <a href="#fig-loops-packet" class="xref">Figure 1</a>.  The current version of this document contains sketches of bindings to GUE <a href="#I-D.ietf-intarea-gue" class="xref">[I-D.ietf-intarea-gue]</a> and Geneve <a href="#I-D.ietf-nvo3-geneve" class="xref">[I-D.ietf-nvo3-geneve]</a>.</p>
+<div id="rfc.figure.1"></div>
+<div id="fig-loops-packet"></div>
+<pre>
+          +------------------------------------+
+          |           Outer header             |
+          +------------------------------------+
+        / |         Tunnel Base Header         |
+      /   +------------------------------------+\
+ Tunnel   |    +-------------------------+     | \
+ Header   ~    |    LOOPS Information    |     ~  Tunnel Header
+      \   |    +-------------------------+     |  Extensions
+        \ +------------------------------------+ /
+          |           Data packet              |
+          +------------------------------------+
+
+</pre>
+<p class="figure">Figure 1: Packet in Tunnel with LOOPS Information</p>
+<p><a href="#fig-loops-usage-scenario" class="xref">Figure 2</a> is extracted from the LOOPS problems and opportunities document <a href="#I-D.li-tsvwg-loops-problem-opportunities" class="xref">[I-D.li-tsvwg-loops-problem-opportunities]</a>. It illustrates the basic architecture and terms of the applicable scenario of LOOPS.  Not all of the concepts introduced in the problems and opportunities document are actually used in the current strawman specification; <a href="#sec-simply" class="xref">Section 3</a> lays out some simplifying assumptions that the present proposal makes.</p>
+<div id="rfc.figure.2"></div>
+<div id="fig-loops-usage-scenario"></div>
+<pre>
+                                                   ON=overlay node
+                                                   UN=underlay node
+
++---------+                                               +---------+
+|   App   | &lt;---------------- end-to-end ---------------&gt; |   App   |
++---------+                                               +---------+
+|Transport| &lt;---------------- end-to-end ---------------&gt; |Transport|
++---------+                                               +---------+
+|         |                                               |         |
+|         |        +--+  path  +--+  path segment2  +--+  |         |
+|         |        |  |&lt;-seg1-&gt;|  |&lt;--------------&gt; |  |  |         |
+| Network |  +--+  |ON|  +--+  |ON|  +--+   +----+  |ON|  | Network |
+|         |--|UN|--|  |--|UN|--|  |--|UN|---| UN |--|  |--|         |
++---------+  +--+  +--+  +--+  +--+  +--+   +----+  +--+  +---------+
+  End Host                                                  End Host
+                    &lt;---------------------------------&gt;
+                     LOOPS domain: path segments enabling
+                     optimization for local in-network recovery
+</pre>
+<p class="figure">Figure 2: LOOPS Usage Scenario</p>
+<h1 id="rfc.section.1.1">
+<a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Terminology</a>
+</h1>
+<p id="rfc.section.1.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in BCP&#160;14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
+<p id="rfc.section.1.1.p.2">This document makes use of the terminology defined in <a href="#I-D.li-tsvwg-loops-problem-opportunities" class="xref">[I-D.li-tsvwg-loops-problem-opportunities]</a>.  This section defines additional terminology used by this document.</p>
+<p></p>
+
+<dl>
+<dt>Data packets:</dt>
+<dd style="margin-left: 8">The payload packets that enter and exit a LOOPS segment.</dd>
+<dt>LOOPS Segment:</dt>
+<dd style="margin-left: 8">A part of an end-to-end path covered by a single instance of the LOOPS protocol, the sub-path between the LOOPS Ingress and the LOOPS Egress.</dd>
+<dt>LOOPS Ingress:</dt>
+<dd style="margin-left: 8">The node that forwards data packets and forward information into the LOOPS segment, potentially performing retransmission and forward error correction based on acknowledgements and measurements received from the LOOPS Egress.</dd>
+<dt>LOOPS Egress:</dt>
+<dd style="margin-left: 8">The node that receives the data packets and forward information from the LOOPS ingress, sends acknowledgements and measurements back to the LOOPS ingress (reverse information), potentially recovers data packets from forward error correction information received.</dd>
+<dt>LOOPS Nodes:</dt>
+<dd style="margin-left: 8">Collective term for LOOPS Ingress and LOOPS Egress in a LOOPS Segment.</dd>
+<dt>Forward Information:</dt>
+<dd style="margin-left: 8">Information that is added to the stream of data packets in the forward direction by the LOOPS Ingress.</dd>
+<dt>Reverse Information:</dt>
+<dd style="margin-left: 8">Information that flows in the reverse direction, from the LOOPS Egress back to the LOOPS Ingress.</dd>
+<dt>Setup Information:</dt>
+<dd style="margin-left: 8">Information that is not transferred as part of the Forward or Reverse Information, but is part of the setup of the LOOPS Nodes.</dd>
+<dt>PSN:</dt>
+<dd style="margin-left: 8">Packet Sequence Number, a sequence number identifying a data packet.</dd>
+<dt>Sender:</dt>
+<dd style="margin-left: 8">Original sender of a packet on an end-to-end path that includes one or more LOOPS segment(s).</dd>
+<dt>Receiver:</dt>
+<dd style="margin-left: 8">Ultimate receiver of a packet on an end-to-end path that includes one or more LOOPS segment(s).</dd>
+</dl>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#challenges" id="challenges">Challenges</a>
+</h1>
+<p id="rfc.section.2.p.1">LOOPS has to perform well in the presence of some challenges, which are discussed in this section.</p>
+<h1 id="rfc.section.2.1">
+<a href="#rfc.section.2.1">2.1.</a> <a href="#no-access-to-end-to-end-transport-information" id="no-access-to-end-to-end-transport-information">No Access to End-to-End Transport Information</a>
+</h1>
+<p id="rfc.section.2.1.p.1">LOOPS is defined to be independent of the content of the packets being forwarded: there is no dependency on transport-layer or higher information.  The intention is to keep LOOPS useful with a traffic mix that may contain encrypted transport protocols such as QUIC as well as encrypted VPN traffic.</p>
+<h1 id="rfc.section.2.2">
+<a href="#rfc.section.2.2">2.2.</a> <a href="#path-asymmetry" id="path-asymmetry">Path Asymmetry</a>
+</h1>
+<p id="rfc.section.2.2.p.1">A LOOPS segment is defined as a unidirectional forwarding path.  The tunnel might be shared with a LOOPS segment in the inverse direction; this then allows to piggyback Reverse Information on encapsulated packets on that segment.  But there is no guarantee that the inverse direction of any end-to-end-path crosses that segment, so the LOOPS optimizations have to be useful on their own in each direction.</p>
+<h1 id="rfc.section.2.3">
+<a href="#rfc.section.2.3">2.3.</a> <a href="#reordering-vs-spurious-retransmission" id="reordering-vs-spurious-retransmission">Reordering vs. Spurious Retransmission</a>
+</h1>
+<p id="rfc.section.2.3.p.1">The end-to-end transport layer protocol may have its own retransmission mechanism to recover lost packets.  When LOOPS recovers a loss, ideally this local recovery would avoid the triggering of a retransmission at the end-to-end sender.</p>
+<p id="rfc.section.2.3.p.2">Whether this is possible depends on the specific end-to-end mechanism used for triggering retransmission.  When end-to-end retransmission is triggered by receiving a sequence of duplicate acknowledgements (DUPACKs), and with more than a few packets in flight, the recovered packet is likely to be too late to fill the hole in the sequence number space that triggers the DUPACK detection.</p>
+<p id="rfc.section.2.3.p.3">(Given a reasonable setting of parameters, the local retransmission will still arrive earlier than the end-to-end retransmission and will possibly unblock application processing earlier; with spurious retransmission detection, there also will be little long-term effect on the send rate.)</p>
+<p id="rfc.section.2.3.p.4">The waste of bandwidth caused by a DUPACK-based end-to-end retransmission can be avoided when the end-to-end loss detection is based on time instead of sequence numbers, e.g., with RACK <a href="#I-D.ietf-tcpm-rack" class="xref">[I-D.ietf-tcpm-rack]</a>.  This requires a limit on the additional latency that LOOPS will incur in its attempt to recover the loss locally.  In the present version of this document, opportunity to set such a limit is provided in the Setup Information.  The limit can be used to compute a deadline for retransmission, but also can be used to choose FEC parameters that keep extra latency low.</p>
+<h1 id="rfc.section.2.4">
+<a href="#rfc.section.2.4">2.4.</a> <a href="#sec-cc" id="sec-cc">Informing the End-to-End Transport</a>
+</h1>
+<p id="rfc.section.2.4.p.1">Congestion control at the end-to-end sender is used to adapt its sending rate to the network congestion status.  In typical TCP senders, packet loss implies congestion and leads to a reduction in sending rate.  With LOOPS operating, packet loss can be masked from the sender as the loss may have been locally recovered.  In this case, rate reduction may not be invoked at the sender.  This is a desirable performance improvement if the loss was a random loss.</p>
+<p id="rfc.section.2.4.p.2">If LOOPS successfully conceals congestion losses from the end-to-end transport protocol, that might increase the rate to a level that congests the LOOPS segment, or that causes excessive queueing at the LOOPS ingress.  What LOOPS should be able to achieve is to let the end host sender invoke the rate reduction mechanism when there is a congestion loss no matter if the lost packet was recovered locally.</p>
+<p id="rfc.section.2.4.p.3">As with any tunneling protocol, information about congestion events inside the tunnel needs to be exported to the end-to-end path the tunnel is part of.  See e.g., <a href="#RFC6040" class="xref">[RFC6040]</a> for a discussion of how to do this in the presence of ECN.  A more recent draft, <a href="#I-D.ietf-tsvwg-tunnel-congestion-feedback" class="xref">[I-D.ietf-tsvwg-tunnel-congestion-feedback]</a>, proposes to activate ECN for the tunnel regardless of whether the end-to-end protocol signals the use of an ECN-capable transport (ECT), which requires more complicated action at the tunnel egress.</p>
+<p id="rfc.section.2.4.p.4">A sender that interprets reordering as a signal of packet loss (DUPACKs) initiates a retransmission and reduces the sending rate.  When spurious retransmission detection (e.g., via F-RTO <a href="#RFC5862" class="xref">[RFC5862]</a> or DSACK <a href="#RFC3708" class="xref">[RFC3708]</a>) is enabled by the TCP sender, it will often be able undo the unnecessary window reduction.  As LOOPS recovers lost packets locally, in most cases the end host sender will eventually find out its reordering-based retransmission (if any) is spurious.  This is an appropriate performance improvement if the loss was a random loss.  For congestion losses, a congestion event needs to be signaled to the end-to-end transport.</p>
+<p id="rfc.section.2.4.p.5">If the end-to-end transport is ECN-capable (which is visible at the IP level), congestion loss events can easily be signaled to them by setting the CE (congestion experienced) mark.  If LOOPS detects a congestion loss for a non-ECT packet, it needs to signal a congestion loss event by introducing a packet loss.  This can be done by choosing not to retransmit or repair the packet loss locally in this case.  Note that one congestion loss per end-to-end RTT is sufficient to provide the rate reduction, so LOOPS may still be able to recover most packets, in particular for burst losses.  (As LOOPS does not interact with the end-to-end transport, it does not know the end-to-end RTT.  Some lower bound derived from configuration and measurements could be used instead.)</p>
+<h1 id="rfc.section.2.5">
+<a href="#rfc.section.2.5">2.5.</a> <a href="#congestion-detection" id="congestion-detection">Congestion Detection</a>
+</h1>
+<p id="rfc.section.2.5.p.1">Properly informing the end-to-end transport protocol about congestion loss events requires distinguishing these from random losses.  In some special cases, distinguishing information may be available from a link layer (e.g., see Section 3 of <a href="#I-D.li-tsvwg-loops-problem-opportunities" class="xref">[I-D.li-tsvwg-loops-problem-opportunities]</a>).  By enabling ECN inside the tunnel, congestion events experienced at ECN-capable routers will usually be identified by the CE mark, which clearly rules out a random loss.</p>
+<p id="rfc.section.2.5.p.2">In the general case, the segment may be composed of hops without such special indications.  In these cases, some detection mechanism is required to provide this distinguishing information.  The specific mechanism used by an implementation is out of scope of LOOPS, but LOOPS will need to provide measurement information for this mechanism.  For instance, congestion detection might be based on path segment latency information, the proper measurement of which therefore requires special attention in LOOPS.</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#sec-simply" id="sec-simply">Simplifying assumptions</a>
+</h1>
+<p id="rfc.section.3.p.1">The above notwithstanding, Implementations may want to make use of indicators such as transport layer port numbers to partition a tunnel flow into separate application flows, e.g., for active queue management (AQM).  Any such functionality is orthogonal to the LOOPS protocol itself and thus out of scope for the present document.</p>
+<p id="rfc.section.3.p.2">One observation that simplifies the design of LOOPS in comparison to that of a reliable transport protocol is that LOOPS does not <em>have</em> to recover every packet loss.  Therefore, probabilistic approaches, and simply giving up after some time has elapsed, can simplify the protocol significantly.</p>
+<p id="rfc.section.3.p.3">For now, we assume that LOOPS segments that may line up on an end-to-end path operate independently of each other.  Since the objective of LOOPS ultimately is to assist the end-to-end protocol, it is likely that some cooperation between them would be beneficial, e.g., to obtain some measurements that cover a larger part of the end-to-end path.  For instance, cooperating LOOPS segments could try to divide up permissible increases to end-to-end latency between them.  This is out of scope for the present version.</p>
+<p id="rfc.section.3.p.4">Another simplifying assumption is that LOOPS nodes have reasonably precise absolute time available to them, so there is no need to burden the LOOPS protocol with time synchronization.  How this is achieved is out of scope.</p>
+<p id="rfc.section.3.p.5">LOOPS nodes are created and set up (information about their peers, parameters) by some control plane mechanism that is out of scope for this specification.  This means there is no need in the LOOPS protocol itself to manage setup information.</p>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#loops-architecture" id="loops-architecture">LOOPS Architecture</a>
+</h1>
+<p id="rfc.section.4.p.1">From the above, the following architecture is derived for LOOPS.</p>
+<p id="rfc.section.4.p.2">LOOPS governs the segment from an ingress node to an egress node, which is part of one or more end-to-end paths.  Often, a LOOPS segment will operate on aggregate traffic from many such end-to-end paths.</p>
+<p id="rfc.section.4.p.3">The LOOPS protocol itself does not define how a LOOPS segment and the protocol entities in the ingress and egress node are set up.  We expect that a <em>setup protocol</em> on the control plane will provide some <em>setup information</em> to the two nodes, including when to start and to tear down processing.</p>
+<p id="rfc.section.4.p.4">Each LOOPS segment governs traffic on one direction in the segment.  The LOOPS ingress adds <em>forward information</em> to that traffic; the LOOPS egress removes the forward information and sends some <em>reverse information</em> to inform the behavior of the ingress.</p>
+<p id="rfc.section.4.p.5">Hence, in the data plane, forward information is added to each data packet.  Reverse information can be sent in separate packets (e.g., Geneve control-only packets <a href="#I-D.ietf-nvo3-geneve" class="xref">[I-D.ietf-nvo3-geneve]</a>) and/or piggybacked on a related, reverse-direction LOOPS flow, similar to the way the forward information for that flow is carried.  The setup protocol is used to provide the relationship between the LOOPS segments in the two directions that is used for piggybacking reverse information.</p>
+<p id="rfc.section.4.p.6">The above describes the &#8220;tunnel mode&#8221;.  A transparent mode is described in <a href="#sec-trans" class="xref">Appendix B</a>, which does not modify the data packets and therefore needs to send any forward information (if needed, for FEC) in separate packets, usually aggregated.</p>
+<p id="rfc.section.4.p.7">The LOOPS <em>generic information set</em> defines what information is provided as setup information, forward information, and reverse information.  <em>Bindings</em> map this information set to specific control plane and data plane protocols, including defining the specific encoding being used.  Where separate packets (outside the data plane protocols being used) need to be sent, a special UDP-based protocol needs to be defined as well.  The various bindings aim for some commonality, so that an implementation for multiple bindings does not need to support gratuitous variety between them.</p>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#sec-model" id="sec-model">LOOPS Generic Information Set</a>
+</h1>
+<p id="rfc.section.5.p.1">This section sketches a generic information set for the LOOPS protocol.  Entries marked with (*) are items that may not be necessary and probably should be left out of an initial specification.</p>
+<h1 id="rfc.section.5.1">
+<a href="#rfc.section.5.1">5.1.</a> <a href="#setup-information" id="setup-information">Setup Information</a>
+</h1>
+<p id="rfc.section.5.1.p.1">Setup Information might include:</p>
+<p></p>
+
+<ul>
+<li>encapsulation protocol in use, and its vital parameters</li>
+<li>identity of LOOPS ingress and LOOPS egress; information relevant for running the encapsulation protocol such as port numbers</li>
+<li>target maximum latency increase caused by the operation of LOOPS on this segment</li>
+<li>maximum retransmission count (*)</li>
+</ul>
+<h1 id="rfc.section.5.2">
+<a href="#rfc.section.5.2">5.2.</a> <a href="#forward-information" id="forward-information">Forward Information</a>
+</h1>
+<p id="rfc.section.5.2.p.1">In the forward information, we have identified:</p>
+<p></p>
+
+<ul>
+<li>tunnel type  (a few bits, meaning agreed between Ingress and Egress)</li>
+<li>packet sequence number PSN (20+ bits), counting the data packets forwarded transmitted by the LOOPS ingress (i.e., retransmissions re-use the PSN)</li>
+<li>an &#8220;ACK desirable&#8221; flag (one bit, usually set for a certain percentage of the data packets only)</li>
+<li>an optional blob, to be echoed by the egress</li>
+<li>anything that the FEC scheme needs.</li>
+</ul>
+<p id="rfc.section.5.2.p.3">The first four together (say, 3+24+4+1) might even fit into 32 bits, but probably need up to 48 bits total.  FEC info of course often needs more space.</p>
+<p id="rfc.section.5.2.p.4">(Note that in this proposal there is no timestamp in the forward information; see <a href="#sec-meas" class="xref">Section 6.3</a>.)</p>
+<p id="rfc.section.5.2.p.5">24 bits of PSN, minus one bit for sequence number arithmetic, gives 8 million packets (or 2.4 GB at typical packet sizes) per worst-case RTT.  So if that is, say, 30 seconds, this would be enough to fill 640 Mbit/s.</p>
+<h1 id="rfc.section.5.3">
+<a href="#rfc.section.5.3">5.3.</a> <a href="#reverse-information" id="reverse-information">Reverse Information</a>
+</h1>
+<p id="rfc.section.5.3.p.1">For the reverse information, we have identified:</p>
+<p></p>
+
+<ul>
+<li>one optional block 1, possibly repeated: <ul>
+<li>PSN being acknowledged</li>
+<li>absolute time of reception for the packet acknowledged (PSN)</li>
+<li>the blob, if present, echoed back</li>
+</ul>
+</li>
+<li>one optional block 2, possibly repeated: <ul>
+<li>an ACK bitmap (based on PSN), always starting at a multiple of 8</li>
+<li>a delta indicating the end PSN of the bitmap (actually the first PSN that is beyond it), using (Acked-PSN &amp; ~7) + 8*(delta+1) as the end of the bitmap.  Acked-PSN in that formula is the previous block 1 PSN seen in this packet, or 0 if none so far.</li>
+</ul>
+</li>
+</ul>
+<p id="rfc.section.5.3.p.3">Block 1 and Block 2 can be interspersed and repeated.  They can be piggybacked on a reverse direction data packet or sent separately if none occurs within some timeout.  They will usually be aggregated in some useful form.  Block 1 information sets are only returned for packets that have &#8220;ACK desirable&#8221; set.  Block 2 information is sent by the receiver based on some saturation scheme (e.g., at least three copies for each PSN span over time).  Still, it might be possible to go down to 1 or 2 amortized bytes per forward packet spent for all this.</p>
+<p id="rfc.section.5.3.p.4">The latency calculation is done by the sender, who occasionally sets &#8220;ACK desirable&#8221;, and notes down the absolute time of transmission for this data packet (the timekeeping can be done quite efficiently as deltas).  Upon reception of a block 1 ACK, it can then subtract that from the absolute time of reception indicated.  This assumes time synchronization between the nodes is at least as good as the precision of latency measurement needed, which should be no problem with IEEE 1588 PTP synchronization (but could be if using NTP-based synchronization only).  A sender can freely garbage collect noted down transmission time information; doing this too early just means that the quality of the RTT sampling will reduce.</p>
+<h1 id="rfc.section.6">
+<a href="#rfc.section.6">6.</a> <a href="#loops-general-operation" id="loops-general-operation">LOOPS General Operation</a>
+</h1>
+<p id="rfc.section.6.p.1">In the Tunnel Mode described in the main body of this document, LOOPS information is carried by some tunnel encapsulation.</p>
+<h1 id="rfc.section.6.1">
+<a href="#rfc.section.6.1">6.1.</a> <a href="#initial-packet-sequence-number" id="initial-packet-sequence-number">Initial Packet Sequence Number</a>
+</h1>
+<p id="rfc.section.6.1.p.1">There is no connection establishment procedure in LOOPS.  The initial PSN is assigned unilaterally by the LOOPS Ingress.</p>
+<p id="rfc.section.6.1.p.2">Because of the short time that is usually set in the maximum latency increase, there is little damage from a collision of PSNs with packets still in flight from previous instances of LOOPS.</p>
+<h1 id="rfc.section.6.1.1">
+<a href="#rfc.section.6.1.1">6.1.1.</a> <a href="#minimizing-collisions" id="minimizing-collisions">Minimizing collisions</a>
+</h1>
+<p id="rfc.section.6.1.1.p.1">If desired, collisions can be minimized by assigning initial PSNs randomly, or using stable storage.  Random assignment is more useful for longer PSNs, where the likelihood of overlap will be low.  The specific way a LOOPS ingress uses stable storage is a local matter and thus out of scope.  (Implementation note: this can be made to work similar to secure nonce generation with write attenuation: Say, every 10000 packets, the sender notes down the PSN into stable storage.  After a reboot, it reloads the PSN and adds 10000 in sequence number arithmetic <a href="#RFC1982" class="xref">[RFC1982]</a>, plus maybe another 10000 so the sender does not have to wait for the store operation to succeed before sending more packets.)</p>
+<h1 id="rfc.section.6.1.2">
+<a href="#rfc.section.6.1.2">6.1.2.</a> <a href="#optional-initial-psn-procedure" id="optional-initial-psn-procedure">Optional Initial PSN procedure</a>
+</h1>
+<p id="rfc.section.6.1.2.p.1">As a potential option (to be discussed), an initial packet sequence number could be communicated using a simple two-bit protocol, based on an I flag (Initial PSN) carried in the forward information and an R flag (Initial PSN Received) in the reverse information.  This procedure essentially clears the egress of any previous state, however, the benefits of this procedure are limited.</p>
+<p id="rfc.section.6.1.2.p.2">The initial PSN is assigned unilaterally by the LOOPS ingress, selected randomly.  The ingress will keep setting the I flag to one when it starts to send packets from a new beginning or whenever it believes there is a need to notify the egress about a new initial PSN.  The ingress will stop setting the I flag when it receives an acknowledgement with the R flag set from the egress.</p>
+<p id="rfc.section.6.1.2.p.3">When the LOOPS egress receives a packets with the I flag set, it stops performing services that assume a sequential PSN.  The egress will no longer provide acknowledgement information for the packets with PSN smaller than this new initial PSN (per sequence number arithmetic <a href="#IEN74" class="xref">[IEN74]</a>).  The egress sends acknowledgement information back without any delay by echoing the value of the I flag in the R flag.  This also means the egress unsets the R flag in subsequent acknowledgements for packets with the I flag unset.</p>
+<p id="rfc.section.6.1.2.p.4">It may happen that the first few packets are lost in an initial PSN assignment process. In this case, the loss of these packets is not detectable by the LOOPS ingress since the first received PSN will be treated as an initial PSN at the egress.  This is an acceptable temporary performance degradation: LOOPS does not intend to provide perfect reliability, and LOOPS usually applies to the aggregated traffic over a tunnel so that the initial PSN assignment happens infrequently.</p>
+<h1 id="rfc.section.6.2">
+<a href="#rfc.section.6.2">6.2.</a> <a href="#acknowledgement-generation" id="acknowledgement-generation">Acknowledgement Generation</a>
+</h1>
+<p id="rfc.section.6.2.p.1">A data packet forwarded by the LOOPS ingress always carries PSN information. The LOOPS egress uses the largest newly received PSN with the &#8220;ACK desired&#8221; bit as the ACK number in the block 1 part of the acknowledgement.  This means that the LOOPS ingress gets to modulate the number of acknowledgement sent by the LOOPS egress.  However, whenever an out-of-order packet arrives while there still are &#8220;holes&#8221; in the PSNs received, the LOOPS receiver should generate a block 2 acknowledgement immediately that the LOOPS sender can use as an ACK list.</p>
+<p id="rfc.section.6.2.p.2">Reverse information can be piggybacked in a reverse direction data packet.  When the reverse direction has no user data to be sent, a pure reverse information packet needs to be generated.  This may be based on a short delay during which the LOOPS egress waits for a data packet to piggyback on.  (To reduce MTU considerations, the egress could wait for less-than-full data packets.)</p>
+<h1 id="rfc.section.6.3">
+<a href="#rfc.section.6.3">6.3.</a> <a href="#sec-meas" id="sec-meas">Measurement</a>
+</h1>
+<p id="rfc.section.6.3.p.1">When sending a block 1 acknowledgement, the LOOPS egress indicates the absolute time of reception of the packet.  The LOOPS ingress can subtract the absolute time of transmission that it still has available, resulting in one high quality latency sample.  (In an alternative design, the forward information could include the absolute time of transmission as well, and block1 information would echo it back.  This trades memory management at the ingress for increased bandwidth and MTU reduction.)</p>
+<p id="rfc.section.6.3.p.2">When a data packet has been transmitted, it may not be clear which specific copy is acknowledged in a block 1 acknowledgement: the acknowledgement for the initial (or, more generally, an earlier) copy may have been delayed (ACK ambiguity)).  The LOOPS ingress therefore SHOULD NOT base its measurements on acknowledgements for retransmitted data packets.  One way to achieve this is by not setting the &#8220;ACK desired&#8221; bit on retransmissions in the first place.</p>
+<p id="rfc.section.6.3.p.3">The LOOPS ingress can also use the time of reception of the block 1 acknowledgement to obtain a segment RTT sample.  Note that this will include any wait time the LOOPS egress incurs while waiting for a piggybacking opportunity &#8212; this is appropriate, as all uses of an RTT will be for keeping a retransmission timeout.</p>
+<p id="rfc.section.6.3.p.4">To maintain quality of information during idle times, the LOOPS ingress may send keepalive packets, which are discarded at the LOOPS egress after sending acknowledgements.  The indication that a packet is a keepalive packet is dependent on the encapsulation protocol.</p>
+<h1 id="rfc.section.6.3.1">
+<a href="#rfc.section.6.3.1">6.3.1.</a> <a href="#ingress-relative-timestamps" id="ingress-relative-timestamps">Ingress-relative timestamps</a>
+</h1>
+<p id="rfc.section.6.3.1.p.1">As an optional procedure, the ingress node can attach a small blob of data to a forward packet that carries an ACK desired flag; this blob is then echoed by the egress in its block 1 acknowledgement.  This is typically used to attach a timestamp on a time scale defined by the ingress; we speak of an ingress-relative timestamp.  Alternatively, the ingress can keep a timestamp in its local storage, associated with the PSN of the packet that carries an ACK desired flag; it can then retrieve this timestamp when the block 1 acknowledgement arrives.</p>
+<p id="rfc.section.6.3.1.p.2">In either case, the LOOPS ingress keeps track of the local segment round trip time (LRTT) based on the (saved or received) timestamp and the arrival time of the block 1 acknowledgement, by setting the ACK Desired flag (D flag) occasionally (several times per RTT) and saving/including a sending timestamp for/in the packet.</p>
+<p id="rfc.section.6.3.1.p.3">As the egress will send block 1 acknowledgement information right away when it receives a packet with the D flag set, the measurement of LRTT is more accurate for such packets.  A smoothed local segment round trip time S_LRTT can be computed in a similar way as defined by <a href="#RFC0793" class="xref">[RFC0793]</a>. A recent minimum value of LRTT is also kept as min_LRTT.  S_LRTT is used as a basis for the overall timing of retransmission and state management.</p>
+<p id="rfc.section.6.3.1.p.4">Retransmitted packets MUST NOT be used for local segment round trip time (LRTT) calculation.</p>
+<h1 id="rfc.section.6.3.2">
+<a href="#rfc.section.6.3.2">6.3.2.</a> <a href="#ack-generation" id="ack-generation">ACK generation</a>
+</h1>
+<p id="rfc.section.6.3.2.p.1">A block 1 acknowledgement is generated based on receiving a forward packet with a D flag.</p>
+<p id="rfc.section.6.3.2.p.2">The way block 2 acknowledgement information is sent is more subject to control by the egress.  Generally, the egress will aggregate ACK bits for at least K packets before sending a block 2; this can be used to amortize the overhead to close to a couple of bits per ACK.  In order to counter loss of reverse information packets, an egress will also want to send an ACK bit more than once &#8212; a saturation value of 3 or more may be chosen based on setup information.  Typically, ACK bits already sent will be prepended to ACK bits that are new in this block 2 information set.  If K packets do not accumulate for a while, the egress will send one or more packets with block 2 information that covers the unsent ACK bits it has so far.</p>
+<p id="rfc.section.6.3.2.p.3">(Discussion: This works best if the egress has information both about the S_RTT and min_RTT that the ingress uses and the reverse packet loss rate.)</p>
+<h1 id="rfc.section.6.4">
+<a href="#rfc.section.6.4">6.4.</a> <a href="#loss-detection-and-recovery" id="loss-detection-and-recovery">Loss detection and Recovery</a>
+</h1>
+<p id="rfc.section.6.4.p.1">There are two ways for LOOPS local recovery, retransmission and FEC.</p>
+<h1 id="rfc.section.6.4.1">
+<a href="#rfc.section.6.4.1">6.4.1.</a> <a href="#local-retransmission" id="local-retransmission">Local Retransmission</a>
+</h1>
+<p id="rfc.section.6.4.1.p.1">When retransmission is used as recovery mechanism, the LOOPS ingress detects a packet loss by not receiving an ACK for the packet within the time expected based on an RTO value (which might be calculated as in <a href="#RFC6298" class="xref">[RFC6298]</a>).  Packet retransmission should then not be performed more than once within an LRTT.</p>
+<p id="rfc.section.6.4.1.p.2">When a retransmission is desired (see <a href="#sec-cc" class="xref">Section 2.4</a> for why it might not be), the LOOPS ingress performs the local in-network recovery by retransmitting the packet.  Further retransmissions may be desirable if the lack of ACK is persistent beyond an RTO, as long as the maximum latency increase is not reached.</p>
+<h1 id="rfc.section.6.4.2">
+<a href="#rfc.section.6.4.2">6.4.2.</a> <a href="#fec" id="fec">FEC</a>
+</h1>
+<p id="rfc.section.6.4.2.p.1">FEC is another way to perform local recovery.  When FEC is in use, a FEC header is sent with data packets as well as with special repair packets added to the flow.  The specific FEC scheme used could be defined in the Setup Information, using a mechanism like <a href="#RFC5052" class="xref">[RFC5052]</a>.  The FEC rate (amount of redundancy added) and possibly the FEC scheme could be unilaterally adjusted by the LOOPS ingress in an adaptive mechanism based on the measurement information.</p>
+<h1 id="rfc.section.6.5">
+<a href="#rfc.section.6.5">6.5.</a> <a href="#discussion" id="discussion">Discussion</a>
+</h1>
+<p id="rfc.section.6.5.p.1">Without progress in the way that end-host transport protocols handle reordering, LOOPS will be unable to prevent end-to-end retransmissions that duplicate effort that is spent in local retransmissions.  It depends on parameters of the path segment whether this wasted effort is significant or not.</p>
+<p id="rfc.section.6.5.p.2">One remedy against this waste could be the introduction of resequencing at the LOOPS Egress node.  This increases overall mean packet latency, but does not always increase actual end-to-end data stream latency if a head-of-line blocking transport such as TCP is in use.  For applications with a large percentage of legacy TCP end-hosts and sufficient processing capabilities at the LOOPS Egress node, resequencing may be a viable choice.  Note that resequencing could be switched off and on depending on some measurement information.</p>
+<p id="rfc.section.6.5.p.3">The packet numbering scheme chosen by LOOPS already provides the necessary information for the LOOPS Egress to reconstruct the sequence of data packets at the LOOPS ingress.</p>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#sec-sketches" id="sec-sketches">Sketches of Bindings to Tunnel Protocols</a>
+</h1>
+<p id="rfc.section.7.p.1">The LOOPS information defined above in a generic way can be mapped to specific tunnel encapsulation protocols.  Sketches for two tunnel protocols are given below: Geneve (<a href="#sec-geneve" class="xref">Section 7.1</a>), and GUE (<a href="#sec-gue" class="xref">Section 7.2</a>).  The actual encapsulation can be designed in a &#8220;native&#8221; way by putting each of the various elements into the TLV format of the encapsulation protocol, or it can be achieved by providing single TLVs for forward and reverse information and using some generic encoding of both kinds of information as shown in <a href="#hybrid" class="xref">Appendix B.3</a>.</p>
+<h1 id="rfc.section.7.1">
+<a href="#rfc.section.7.1">7.1.</a> <a href="#sec-geneve" id="sec-geneve">Embedding LOOPS in Geneve</a>
+</h1>
+<p id="rfc.section.7.1.p.1">Geneve <a href="#I-D.ietf-nvo3-geneve" class="xref">[I-D.ietf-nvo3-geneve]</a> is an extensible overlay protocol which can embed LOOPS functions. Geneve uses TLVs to carry optional information between NVEs.  NVE is logically the same entity as the LOOPS node.</p>
+<p id="rfc.section.7.1.p.2">The Geneve header has a mandatory Virtual Network Identifier (VNI) field. The specific VNI value to be used is part of the setup information for the LOOPS tunnel.</p>
+<p id="rfc.section.7.1.p.3">More details for a Geneve binding for LOOPS can be found in <a href="#I-D.bormann-loops-geneve-binding" class="xref">[I-D.bormann-loops-geneve-binding]</a>.</p>
+<h1 id="rfc.section.7.2">
+<a href="#rfc.section.7.2">7.2.</a> <a href="#sec-gue" id="sec-gue">Embedding LOOPS in GUE</a>
+</h1>
+<p id="rfc.section.7.2.p.1">GUE <a href="#I-D.ietf-intarea-gue" class="xref">[I-D.ietf-intarea-gue]</a> is an extensible overlay protocol which can embed LOOPS functions. GUE uses flags to indicate the presence of fixed length header extensions. It also allows variable length extensions to be put in &#8220;Private data&#8221; field. A new LOOPS data block in the &#8220;private data&#8221; field needs to be defined based on the LOOPS generic information in <a href="#sec-model" class="xref">Section 5</a>.</p>
+<p id="rfc.section.7.2.p.2">In the reverse direction, when no data packets are available for piggybacking, LOOPS reverse information is carried in a control message with the C-bit set in the GUE header.  The Proto/ctype field contains a control message type when C bit is set.  Hence a new control message type should be defined for such LOOPS reverse information.</p>
+<h1 id="rfc.section.8">
+<a href="#rfc.section.8">8.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
+</h1>
+<p id="rfc.section.8.p.1">No IANA action is required at this stage.  When a LOOPS representation is designed for a specific tunneling protocol, new codepoints will be required in the registries that pertain to that protocol.</p>
+<h1 id="rfc.section.9">
+<a href="#rfc.section.9">9.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
+</h1>
+<p id="rfc.section.9.p.1">The security of a specific LOOPS segment will depend both on the properties of the generic information set described here and those of the encapsulation protocol employed.  The security considerations of the encapsulation protocol will apply, as will the protection afforded by any security measures provided by the encapsulation protocol.  Any LOOPS encapsulation specification is expected to provide information about preferred configurations of the encapsulation protocol employed, including security mechanisms, and to provide a security considerations section discussing the combination.  The following discussion aims at discussing security considerations that will be common between different encapsulations.</p>
+<h1 id="rfc.section.9.1">
+<a href="#rfc.section.9.1">9.1.</a> <a href="#threat-model" id="threat-model">Threat model</a>
+</h1>
+<p id="rfc.section.9.1.p.1">Attackers might attempt to perturb the operation of a LOOPS segment for a number of purposes:</p>
+<p></p>
+
+<ul>
+<li>Denial of Service: Damaging the ability of LOOPS to recover packets, or damaging packet forwarding through the LOOPS segment in general.</li>
+<li>Attacks on Confidentiality or Integrity: Obtaining the content of data packets, modifying them, injecting new or suppressing specific data packets.</li>
+</ul>
+<p id="rfc.section.9.1.p.3">For the purposes of these security considerations, we can distinguish three classes of attackers:</p>
+<p></p>
+
+<ol>
+<li>on-path read-write: The attacker sees packets under way on the segment and can modify, inject, or suppress them.  <br><br> In this case there is really nothing LOOPS can do, except for acting as a full security protocol on its own, which would be the task of the encapsulation protocol.  Without that, attackers already can manipulate the packet stream as they wish.  This class of attackers is considered out of scope for these security considerations.</li>
+<li>on-path read + inject: The attacker sees packets under way on the segment and can inject new packets.  <br><br> For this case, LOOPS itself similarly cannot add to the confidentiality of the data stream.  However, LOOPS could protect against denial of service against its own protocol operation and, in a limited fashion, against attacks on integrity that wouldn&#8217;t already have been possible by packet injection without LOOPS.</li>
+<li>off-path inject: The attacker can inject new packets, but cannot see existing packets under way on the segment.  <br><br> Similar considerations apply as for class 2, except that the &#8220;blind&#8221; class 3 attacker might need to guess information it could have extracted from the packet stream in class 2.</li>
+</ol>
+<h1 id="rfc.section.9.2">
+<a href="#rfc.section.9.2">9.2.</a> <a href="#discussion-1" id="discussion-1">Discussion</a>
+</h1>
+<p id="rfc.section.9.2.p.1">Class 2 attackers can see e.g. sequence numbers and can inject, but not modify traffic.  Attacks might include injecting false ACKs, initial PSN flags, &#8230; (TBD)</p>
+<p id="rfc.section.9.2.p.2">Class 3 (&#8220;blind&#8221;) attackers might still be able to fake initial PSN bits + false ACKs, but will have a harder time otherwise as it would need to guess the PSN range in which it can wreak havoc.  Even random guesses will sometimes hit, though, so the protocol needs to be robust to such injection attacks. &#8230; (TBD)</p>
+<h1 id="rfc.references">
+<a href="#rfc.references">10.</a> References</h1>
+<h1 id="rfc.references.1">
+<a href="#rfc.references.1">10.1.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="RFC2119">[RFC2119]</b></td>
+<td class="top">
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8174">[RFC8174]</b></td>
+<td class="top">
+<a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.references.2">
+<a href="#rfc.references.2">10.2.</a> Informative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="RFC0793">[RFC0793]</b></td>
+<td class="top">
+<a>Postel, J.</a>, "<a href="https://tools.ietf.org/html/rfc793">Transmission Control Protocol</a>", STD 7, RFC 793, DOI 10.17487/RFC0793, September 1981.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC1982">[RFC1982]</b></td>
+<td class="top">
+<a>Elz, R.</a> and <a>R. Bush</a>, "<a href="https://tools.ietf.org/html/rfc1982">Serial Number Arithmetic</a>", RFC 1982, DOI 10.17487/RFC1982, August 1996.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3708">[RFC3708]</b></td>
+<td class="top">
+<a>Blanton, E.</a> and <a>M. Allman</a>, "<a href="https://tools.ietf.org/html/rfc3708">Using TCP Duplicate Selective Acknowledgement (DSACKs) and Stream Control Transmission Protocol (SCTP) Duplicate Transmission Sequence Numbers (TSNs) to Detect Spurious Retransmissions</a>", RFC 3708, DOI 10.17487/RFC3708, February 2004.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5052">[RFC5052]</b></td>
+<td class="top">
+<a>Watson, M.</a>, <a>Luby, M.</a> and <a>L. Vicisano</a>, "<a href="https://tools.ietf.org/html/rfc5052">Forward Error Correction (FEC) Building Block</a>", RFC 5052, DOI 10.17487/RFC5052, August 2007.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5862">[RFC5862]</b></td>
+<td class="top">
+<a>Yasukawa, S.</a> and <a>A. Farrel</a>, "<a href="https://tools.ietf.org/html/rfc5862">Path Computation Clients (PCC) - Path Computation Element (PCE) Requirements for Point-to-Multipoint MPLS-TE</a>", RFC 5862, DOI 10.17487/RFC5862, June 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6040">[RFC6040]</b></td>
+<td class="top">
+<a>Briscoe, B.</a>, "<a href="https://tools.ietf.org/html/rfc6040">Tunnelling of Explicit Congestion Notification</a>", RFC 6040, DOI 10.17487/RFC6040, November 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6298">[RFC6298]</b></td>
+<td class="top">
+<a>Paxson, V.</a>, <a>Allman, M.</a>, <a>Chu, J.</a> and <a>M. Sargent</a>, "<a href="https://tools.ietf.org/html/rfc6298">Computing TCP's Retransmission Timer</a>", RFC 6298, DOI 10.17487/RFC6298, June 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6330">[RFC6330]</b></td>
+<td class="top">
+<a>Luby, M.</a>, <a>Shokrollahi, A.</a>, <a>Watson, M.</a>, <a>Stockhammer, T.</a> and <a>L. Minder</a>, "<a href="https://tools.ietf.org/html/rfc6330">RaptorQ Forward Error Correction Scheme for Object Delivery</a>", RFC 6330, DOI 10.17487/RFC6330, August 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8610">[RFC8610]</b></td>
+<td class="top">
+<a>Birkholz, H.</a>, <a>Vigano, C.</a> and <a>C. Bormann</a>, "<a href="https://tools.ietf.org/html/rfc8610">Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures</a>", RFC 8610, DOI 10.17487/RFC8610, June 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.ietf-tcpm-rack">[I-D.ietf-tcpm-rack]</b></td>
+<td class="top">
+<a>Cheng, Y.</a>, <a>Cardwell, N.</a>, <a>Dukkipati, N.</a> and <a>P. Jha</a>, "<a href="https://tools.ietf.org/html/draft-ietf-tcpm-rack-07">RACK: a time-based fast loss detection algorithm for TCP</a>", Internet-Draft draft-ietf-tcpm-rack-07, January 2020.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.ietf-nvo3-geneve">[I-D.ietf-nvo3-geneve]</b></td>
+<td class="top">
+<a>Gross, J.</a>, <a>Ganga, I.</a> and <a>T. Sridhar</a>, "<a href="https://tools.ietf.org/html/draft-ietf-nvo3-geneve-16">Geneve: Generic Network Virtualization Encapsulation</a>", Internet-Draft draft-ietf-nvo3-geneve-16, March 2020.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.ietf-intarea-gue">[I-D.ietf-intarea-gue]</b></td>
+<td class="top">
+<a>Herbert, T.</a>, <a>Yong, L.</a> and <a>O. Zia</a>, "<a href="https://tools.ietf.org/html/draft-ietf-intarea-gue-09">Generic UDP Encapsulation</a>", Internet-Draft draft-ietf-intarea-gue-09, October 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.li-tsvwg-loops-problem-opportunities">[I-D.li-tsvwg-loops-problem-opportunities]</b></td>
+<td class="top">
+<a>Yizhou, L.</a>, <a>Zhou, X.</a>, <a>Boucadair, M.</a> and <a>J. Wang</a>, "<a href="https://tools.ietf.org/html/draft-li-tsvwg-loops-problem-opportunities-04">LOOPS (Localized Optimizations on Path Segments) Problem Statement and Opportunities for Network-Assisted Performance Enhancement</a>", Internet-Draft draft-li-tsvwg-loops-problem-opportunities-04, January 2020.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.ietf-tsvwg-tunnel-congestion-feedback">[I-D.ietf-tsvwg-tunnel-congestion-feedback]</b></td>
+<td class="top">
+<a>Wei, X.</a>, <a>Yizhou, L.</a>, <a>Boutros, S.</a> and <a>L. Geng</a>, "<a href="https://tools.ietf.org/html/draft-ietf-tsvwg-tunnel-congestion-feedback-07">Tunnel Congestion Feedback</a>", Internet-Draft draft-ietf-tsvwg-tunnel-congestion-feedback-07, May 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.bormann-loops-geneve-binding">[I-D.bormann-loops-geneve-binding]</b></td>
+<td class="top">
+<a>Bormann, C.</a>, "<a href="https://tools.ietf.org/html/draft-bormann-loops-geneve-binding-00">Embedding LOOPS in Geneve</a>", Internet-Draft draft-bormann-loops-geneve-binding-00, November 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="IEN74">[IEN74]</b></td>
+<td class="top">
+<a title="BB&amp;N Inc">Plummer, W.</a>, "<a>Sequence Number Arithmetic</a>", Internet Experiment Note 74, September 1978.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.appendix.A">
+<a href="#rfc.appendix.A">Appendix A.</a> <a href="#sec-proto" id="sec-proto">Protocol used in Prototype Implementation</a>
+</h1>
+<p id="rfc.section.A.p.1">This appendix describes, in a somewhat abstracted form, the protocol as used in a prototype implementation, as described by Yizhou Li, and Xingwang Zhou.</p>
+<p id="rfc.section.A.p.2">The prototype protocol can be run in one of two modes (defined by preconfiguration):</p>
+<p></p>
+
+<ul>
+<li>Retransmission mode</li>
+<li>Forward Error Correction (FEC) mode</li>
+</ul>
+<p id="rfc.section.A.p.4">Forward information is piggybacked in data packets.</p>
+<p id="rfc.section.A.p.5">Reverse information can be carried in a pure acknowledgement packet or piggybacked when carrying packets for the inverse direction.</p>
+<p id="rfc.section.A.p.6">The forward information includes:</p>
+<p></p>
+
+<ul>
+<li>Packet Sequence Number (PSN) (32 bits): This identifies a packet over a specific overlay segment from a specific LOOPS Ingress.  If a packet is retransmitted by LOOPS, the retransmission uses the original PSN.</li>
+<li>Timestamp (32 bits): Information, in a format local to the LOOPS ingress, that provides the time when the packet was sent.  In the current implementation, a 32-bit unsigned value specifying the time delta in some granularity from the epoch time to the sending time of the packet carrying this timestamp. The granularity can be from 1 ms to 1 second. The epoch time follows the current TCP practice which is 1 January 1970 00:00:00 UTC.  Note that a retransmitted packet uses its own Timestamp.</li>
+<li>FEC Info for Block Code (56 bits): This header is used in FEC mode.  It currently only provides for a block code FEC scheme.  It includes the Source Block Number (SBN), Encoding Symbol ID (ESI), number of symbols in a single source block and symbol size. <a href="#sec-fec" class="xref">Appendix A.1</a> gives more details on FEC.</li>
+</ul>
+<p id="rfc.section.A.p.8">The reverse information includes:</p>
+<p></p>
+
+<ul>
+<li>ACK Number (32 bits): The largest (in sequence number arithmetic <a href="#RFC1982" class="xref">[RFC1982]</a>) PSN received so far.</li>
+<li>ACK List (variable): This indicates an array of PSN numbers to describe the PSN &#8220;holes&#8221; preceding the ACK number. It conceptually lists the PSNs of every packet perceived as lost by the LOOPS egress.  In actual use, it is truncated.</li>
+<li>Echoed Timestamp (32 bits): The timestamp received with the packet being acknowledged.</li>
+</ul>
+<h1 id="rfc.appendix.A.1">
+<a href="#rfc.appendix.A.1">A.1.</a> <a href="#sec-fec" id="sec-fec">Block Code FEC</a>
+</h1>
+<p id="rfc.section.A.1.p.1">The prototype currently uses a block code FEC scheme (RaptorQ <a href="#RFC6330" class="xref">[RFC6330]</a>).  The fields in the FEC Info forward information are:</p>
+<p></p>
+
+<ul>
+<li>Source Block Number (SBN): 16 bits. An integer identifier for the source block that the encoding symbols within the packet relate to.</li>
+<li>Encoding Symbol ID (ESI): 16 bits. An integer identifier for the encoding symbols within the packet.</li>
+<li>K: 8 bits. Number of symbols in a single source block.</li>
+<li>T: 16 bits. Symbol size in bytes.</li>
+</ul>
+<p id="rfc.section.A.1.p.3">The LOOPS Ingress uses the data packet in <a href="#fig-loops-packet" class="xref">Figure 1</a> to generate the encoding packet.  Both source packets and repair packets carry the FEC header information; the LOOPS Egress reconstructs the data packets from both kinds of packets.  The LOOPS Egress currently resequences the forwarded and reconstructed packets, so they are passed on in-order when the lost packets are recoverable within the source block.</p>
+<p id="rfc.section.A.1.p.4">The LOOPS Nodes need to agree on the use of FEC block mode and on the specific FEC Encoding ID to use; this is currently done by configuration.</p>
+<h1 id="rfc.appendix.B">
+<a href="#rfc.appendix.B">Appendix B.</a> <a href="#sec-trans" id="sec-trans">Transparent mode</a>
+</h1>
+<p id="rfc.section.B.p.1">This appendix defines a very different way to provide the LOOPS services, &#8220;transparent mode&#8221;.  (We call the protocol described in the main body of the document &#8220;encapsulated mode&#8221;.)</p>
+<p id="rfc.section.B.p.2">In transparent mode, the idea is that LOOPS does not meddle with the forward transmission of data packets, but runs on the side exchanging additional information.</p>
+<p id="rfc.section.B.p.3">An implementation could be based on conventional forwarding switches that just provide a copy of the ingress and egress packet stream to the LOOPS implementations.  The LOOPS process would occasionally inject recovered packets back into the LOOPS egress node&#8217;s forwarding switch, see <a href="#fig-transparent" class="xref">Figure 3</a>.</p>
+<div id="rfc.figure.3"></div>
+<div id="fig-transparent"></div>
+<pre>
+           |
+   +-------+-------------------------------------------+
+   |       |                                           |
+   |  +----+--------+   +-------------------+          |
+   |  |    | copy   |   |                   |          |
+   |  |    |----------------&gt; LOOPS ingress |          |
+   |  |    |        |   |     |     ^       |          |
+   |  +----+--------+   +-----|-----|-------+          |
+   |   data|packets    forward|     |reverse           |
+   |       |              info|     |info              |
+   +-------+------------------|-----|------------------+
+           |                  |     |
+   +-------+------------------|-----|------------------+
+   |       |                  |     |                  |
+   |  +----+---------+   +----|-----|----------+       |
+   |  |    | copy    |   |    v     |          |       |
+   |  |    |---------|---|---&gt; LOOPS egress    |       |
+   |  |    |         |   |                     |       |
+   |  |    |&lt;--------|---|---- inject          |       |
+   |  +----+---------+   +---------------------+       |
+   |       |                                           |
+   +-------+-------------------------------------------+
+           |
+           v
+</pre>
+<p class="figure">Figure 3: LOOPS Transparent Mode</p>
+<p id="rfc.section.B.p.4">The obvious advantage of transparent mode is that no encapsulation is needed, reducing processing requirements and keeping the MTU unchanged.  The obvious disadvantage is that no forward information can be provided with each data packet, so a replacement needs to be found for the PSN (packet sequence number) employed in encapsulated mode.  Any forward information beyond the data packets is sent in separate packets exchanged directly between the LOOPS nodes.</p>
+<h1 id="rfc.appendix.B.1">
+<a href="#rfc.appendix.B.1">B.1.</a> <a href="#packet-identification" id="packet-identification">Packet identification</a>
+</h1>
+<p id="rfc.section.B.1.p.1">Retransmission mode and FEC mode differ in their needs for packet identification.  For retransmission mode, a somewhat probabilistic accuracy of the packet identification is sufficient, for FEC mode, packet identification should not make mistakes (as these would lead to faultily reconstructed packets).</p>
+<p id="rfc.section.B.1.p.2">In Retransmission mode, misidentification of a packet could lead to measurement errors as well as missed retransmission opportunities.  The latter will be fixed end-to-end.  The tolerance for measurement errors would influence the degree of accuracy that is aimed for.</p>
+<p id="rfc.section.B.1.p.3">Packet identification can be based on a cryptographic hash of the packet, computed in LOOPS ingress and egress using the same algorithm (excluding fields that can change in transit, such as TTL/hop limit).  The hash can directly be used as a packet number, or it can be sent in the forward information together with a packet sequence number, establishing a mapping.</p>
+<p id="rfc.section.B.1.p.4">For probabilistic packet identification, it is almost always sufficient to hash the first few (say, 64) bytes of the packet; all known transport protocols keep sufficient identifying information in that part (and, for encrypted protocols, the entropy will be sufficient).  Any collisions of the hash could be used to disqualify the packet for measurement purposes, minimizing the measurement errors; this could allow rather short packet identifiers in retransmission mode.</p>
+<p id="rfc.section.B.1.p.5">For FEC mode, the packet identification together with the per-packet FEC information needs to be sent in the (separate) forward information, so that a systematic code can be reconstructed.  For retransmission mode, there is no need to send any forward information for most packets, or a mapping from packet identifiers to packet sequence numbers could be sent in the forward information (probably in some aggregated form).  The latter would allow keeping the acknowledgement form described in the main body (with aggregate acknowledgement); otherwise, packet identifiers need to be acknowledged.  With this change, the LOOPS egress will send reverse information as in the encapsulating LOOPS protocol.</p>
+<h1 id="rfc.appendix.B.2">
+<a href="#rfc.appendix.B.2">B.2.</a> <a href="#generic-information-and-protocol-operation" id="generic-information-and-protocol-operation">Generic information and protocol operation</a>
+</h1>
+<p id="rfc.section.B.2.p.1">With the changes outlined above, transparent mode operates just as encapsulated mode.  If packet sequence numbers are not used, there is no use for block2 reverse information; if they are used, a new block3 needs to be defined that provides the mapping from packet identifiers to packet sequence numbers in the forward information.  To avoid MTU reduction, some mechanism will be needed to encapsulate the actual FEC information (additional packets) in the forward information.</p>
+<h1 id="rfc.appendix.B.3">
+<a href="#rfc.appendix.B.3">B.3.</a> <a href="#hybrid" id="hybrid">A hybrid mode</a>
+</h1>
+<p><a href="#fig-transparent" class="xref">Figure 3</a> can be modified by including a GRE encapsulator into the top left corner and a GRE decapsulator in the bottom left corner.  This provides more defined ingress and egress points, but it also provides an opportunity to add a packet sequence number at the ingress.  The copies to the top right and bottom right corners are the encapsulated form, i.e., include the sequence number.</p>
+<p id="rfc.section.B.3.p.2">The GRE packet header then has the form:</p>
+<pre>
+   0                   1                   2                   3
+   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |0|0|0|1|    000000000    | 000 |         Protocol Type         |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |                         Sequence Number                       |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+<p id="rfc.section.B.3.p.3">The forward and reverse information can be designed closer to the approach in the main body of the document, to be exchanged using UDP packets between top right ingress and bottom right egress using a port number allocated for this purpose.</p>
+<p id="rfc.section.B.3.p.4">Rough ideas for both directions are given below in CDDL <a href="#RFC8610" class="xref">[RFC8610]</a>.  This information set could be encoded in CBOR or in a bespoke encoding; details such as this can be defined later.</p>
+<pre>
+forward-information = [
+  [rel-psn, ack-desired, ? fec-info] /
+  fec-repair-data
+]
+
+rel-psn = uint; relative packet sequence number
+; always given as a delta from the previous one in the array
+; starting out with a "previous value" of 0
+
+ack-desired = bool
+
+fec-info = [
+    sbn: uint, ; Source Block Number
+    esi: uint, ; Encoding Symbol ID
+    ? (
+      nsssb: uint; number of symbols in a single source block
+      ss: uint; symbol size
+    )
+]
+
+fec-repair-data = [
+    repair-data: bytes
+    ? (
+      sbn: uint, ; Source Block Number
+      esi: uint, ; Encoding Symbol ID
+    )
+]
+</pre>
+<p id="rfc.section.B.3.p.5">If left out for a sequence number, the fec-info block is constructed by adding one to the previous one.  fec-repair-data contain repair symbols for the sbn/esi given (which, again, are reconstructed from context if not given).</p>
+<pre>
+reverse-information = [
+    block1 / block2
+]
+
+block1 = [rel-psn, timestamp]
+block2 = [end-psn-delta: uint, acked-bits: bytes]
+</pre>
+<p id="rfc.section.B.3.p.6">The acked-bits in a block2 is a bitmap that gives acknowledgments for received data packets.  The bitmap always comes as a multiple of 8 bits (all bytes are filled in with 8 bits, each identifying a PSN).  The end PSN of the bitmap (actually the first PSN that would be beyond it) is computed from the current PSN as set by rel-psn, rounded down to a multiple of 8, and adding 8*(end-psn-delta+1) to that value.</p>
+<h1 id="rfc.acknowledgements"><a href="#rfc.acknowledgements">Acknowledgements</a></h1>
+<p id="rfc.section.C.p.1">Sami Boutros helped with sketching the use of Geneve (<a href="#sec-geneve" class="xref">Section 7.1</a>), and Tom Herbert helped with sketching the use of GUE (<a href="#sec-gue" class="xref">Section 7.2</a>).</p>
+<p id="rfc.section.C.p.2">Michael Welzl has been supported by the Research Council of Norway under its &#8220;Toppforsk&#8221; programme through the &#8220;OCARINA&#8221; project.</p>
+<h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Michael Welzl</span> 
+	  <span class="n hidden">
+		<span class="family-name">Welzl</span>
+	  </span>
+	</span>
+	<span class="org vcardline">University of Oslo</span>
+	<span class="adr">
+	  <span class="vcardline">PO Box 1080 Blindern</span>
+
+	  <span class="vcardline">
+		<span class="locality">Oslo</span>,  
+		<span class="region"></span>
+		<span class="code">N-0316</span>
+	  </span>
+	  <span class="country-name vcardline">Norway</span>
+	</span>
+	<span class="vcardline">Phone: +47 22 85 24 20</span>
+
+<span class="vcardline">EMail: <a href="mailto:michawe@ifi.uio.no">michawe@ifi.uio.no</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Carsten Bormann</span> (editor)
+	  <span class="n hidden">
+		<span class="family-name">Bormann</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Universit&#228;t Bremen TZI</span>
+	<span class="adr">
+	  <span class="vcardline">Postfach 330440</span>
+
+	  <span class="vcardline">
+		<span class="locality">Bremen</span>,  
+		<span class="region"></span>
+		<span class="code">D-28359</span>
+	  </span>
+	  <span class="country-name vcardline">Germany</span>
+	</span>
+	<span class="vcardline">Phone: +49-421-218-63921</span>
+
+<span class="vcardline">EMail: <a href="mailto:cabo@tzi.org">cabo@tzi.org</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
+
