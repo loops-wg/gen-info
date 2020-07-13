@@ -54,13 +54,14 @@ informative:
 #  RFC7323: bis1323
 #  RFC7348: vxlan
   RFC8610: cddl
+  RFC8087: benefits
   I-D.ietf-tcpm-rack: rack
   I-D.ietf-nvo3-geneve: geneve
-  I-D.ietf-intarea-gue: gue
+#  I-D.ietf-intarea-gue: gue
   I-D.li-tsvwg-loops-problem-opportunities: LOOPS-prob-oppo
   I-D.ietf-tsvwg-tunnel-congestion-feedback: tunnel-congestion-feedback
   I-D.bormann-loops-geneve-binding: geneve-binding
-  I-D.wang-loops-srv6-binding: srv6-binding
+#  I-D.wang-loops-srv6-binding: srv6-binding
   IEN74:
     -: seq
     title: Sequence Number Arithmetic
@@ -84,9 +85,10 @@ would be interchanged in a LOOPS protocol, without already defining a
 specific data packet format.
 
 The generic information set needs to be mapped to a specific
-encapsulation protocol to actually run the LOOPS optimizations.  The
-current version of this document contains sketches of bindings to GUE
-{{-gue}} and Geneve {{-geneve}}.
+encapsulation protocol to actually run the LOOPS optimizations.
+A companion document contains a sketch of a binding to the tunnel
+encapsulation protocol Geneve {{-geneve}}.
+
 
 --- middle
 
@@ -126,9 +128,10 @@ encapsulation protocol to actually run the LOOPS optimizations.  LOOPS
 is not tied to any specific overlay protocol, but is meant to run
 embedded into a variety of tunnel protocols.  LOOPS information is
 added as part of a tunnel protocol header at the LOOPS ingress as
-shown in {{fig-loops-packet}}.  The current version of this document
-contains sketches of bindings to GUE {{-gue}} and
-Geneve {{-geneve}}.
+shown in {{fig-loops-packet}}.
+A companion document {{-geneve-binding}} contains a sketch of a binding to the tunnel
+encapsulation protocol Geneve {{-geneve}}.
+
 
 ~~~~
 
@@ -192,7 +195,8 @@ Data packets:
 LOOPS Segment:
 : A part of an end-to-end path covered by a single instance of the
   LOOPS protocol, the sub-path between the LOOPS Ingress and the LOOPS
-  Egress.
+  Egress.  Several LOOPS segments may be encountered on an end-to-end
+  path, with or without intervening routers.
 
 LOOPS Ingress:
 : The node that forwards data packets and forward information into the
@@ -223,7 +227,8 @@ Setup Information:
   Reverse Information, but is part of the setup of the LOOPS Nodes.
 
 PSN:
-: Packet Sequence Number, a sequence number identifying a data packet.
+: Packet Sequence Number, a sequence number identifying a data packet
+  between the LOOPS Ingress and Egress.
 
 Sender:
 : Original sender of a packet on an end-to-end path that includes one
@@ -260,7 +265,7 @@ to be useful on their own in each direction.
 
 The end-to-end transport layer protocol may have its own
 retransmission mechanism to recover lost packets.
-When LOOPS recovers a loss, ideally this local recovery would avoid the
+When LOOPS recovers a loss, ideally this local recovery would replace the
 triggering of a retransmission at the end-to-end sender.
 
 Whether this is possible depends on the specific end-to-end mechanism
@@ -276,7 +281,9 @@ possibly unblock application processing earlier; with spurious
 retransmission detection, there also will be little long-term effect
 on the send rate.)
 
-The waste of bandwidth caused by a DUPACK-based end-to-end
+While LOOPS makes no requirements on end-to-end protocols, it is worth
+noting that
+the waste of bandwidth caused by a DUPACK-based end-to-end
 retransmission can be avoided when the end-to-end loss detection is
 based on time instead of sequence numbers, e.g., with RACK
 {{-rack}}.  This requires a limit on the additional
@@ -304,7 +311,8 @@ senders, packet loss implies congestion and leads to a reduction in
 sending rate.  With LOOPS operating, packet loss can be masked from
 the sender as the loss may have been locally recovered.
 In this case, rate reduction may not be invoked at the
-sender.  This is a desirable performance improvement if the loss was a random loss.
+sender.  This is a desirable performance improvement if the loss was a
+random loss, but it is hard to ascertain that.
 
 If LOOPS successfully conceals congestion losses from the end-to-end
 transport protocol, that might increase the rate to a level that
@@ -328,23 +336,36 @@ A sender that interprets reordering as a signal of packet loss
 (DUPACKs) initiates a retransmission and reduces the sending rate.
 When spurious retransmission detection (e.g., via F-RTO {{RFC5862}} or DSACK {{RFC3708}}) is
 enabled by the TCP sender, it will often be able undo the unnecessary window
-reduction.  As LOOPS recovers lost packets locally, in most cases the
+reduction shortly afterwards.  As LOOPS recovers lost packets locally, in most cases the
 end host sender will eventually find out its reordering-based
 retransmission (if any) is spurious.  This is an appropriate
 performance improvement if the loss was a random loss.  For congestion
 losses, a congestion event needs to be signaled to the end-to-end
 transport.
 
-If the end-to-end transport is ECN-capable (which is visible at the IP
-level), congestion loss events can easily be signaled to them by
+The present version of LOOPS requires
+the end-to-end transport to be ECN-capable (which is visible at the IP
+level).  Congestion loss events can easily be signaled to them by
 setting the CE (congestion experienced) mark.
+Effectively, LOOPS converts a packet loss (which would be a congestion
+indication) to a CE mark (which also is a congestion indication).
+
+In effect, LOOPS can be used to convert a path segment that does not
+yet use CE marks for congestion indication, and drops packets instead,
+into a segment that marks for congestion and does not drop packets
+except in extreme cases, incurring the benefits of Using Explicit
+Congestion Notification (ECN) {{-benefits}}.  We speak about the
+"drop-to-mark" function of LOOPS.
+
 <!--
 While end-hosts are increasingly ECN-capable, LOOPS must also work with
 legacy end-hosts, or on paths that suppress ECN negotiation.
  -->
-If LOOPS detects a congestion loss for a non-ECT packet, it needs to
-signal a congestion loss event by introducing a packet loss.
-This can be done by choosing not to retransmit or repair the
+ <!--
+If LOOPS were to work also for non-ECT packets, it would need to
+signal a congestion loss event by introducing a packet loss, as
+CE-marking is not guaranteed to be noticed.
+This could be done by choosing not to retransmit or repair the
 packet loss locally in this case.
 Note that one congestion loss per end-to-end RTT is
 sufficient to provide the rate reduction, so LOOPS may still be able
@@ -352,15 +373,13 @@ to recover most packets, in particular for burst losses.
 (As LOOPS does not interact with the end-to-end transport, it does not
 know the end-to-end RTT.  Some lower bound derived from configuration
 and measurements could be used instead.)
-
+ -->
 <!--
 The maximum latency increase provided
 in the setup information should be able to provide a useful lower
 bound for that, though.
  -->
-
-## Congestion Detection
-
+<!-- hash hash Congestion Detection
 Properly informing the end-to-end transport protocol about congestion
 loss events requires distinguishing these from random losses.
 In some special cases, distinguishing information may be available from a link
@@ -368,7 +387,7 @@ layer (e.g., see Section 3 of {{-LOOPS-prob-oppo}}).
 By enabling ECN inside the tunnel, congestion events experienced at
 ECN-capable routers will usually be identified by the CE mark, which
 clearly rules out a random loss.
-
+ --> <!--
 In the general case, the segment may be composed of hops without such
 special indications.
 In these cases, some detection mechanism is required to provide
@@ -378,7 +397,7 @@ LOOPS, but LOOPS will need to provide measurement information for this mechanism
 For instance, congestion detection might be based on path segment
 latency information, the proper measurement of which therefore
 requires special attention in LOOPS.
-
+ -->
 
 # Simplifying assumptions {#sec-simply}
 
@@ -721,8 +740,8 @@ the time expected based on an RTO value (which might be calculated as
 in {{-rto}}).  Packet retransmission should then not be performed more
 than once within an LRTT.
 
-When a retransmission is desired (see {{sec-cc}} for why it might not
-be), the LOOPS ingress performs the local in-network recovery by
+When a retransmission is desired<!-- (see {{sec-cc}} for why it might not
+be)  -->, the LOOPS ingress performs the local in-network recovery by
 retransmitting the packet.  Further retransmissions may be desirable
 if the lack of ACK is persistent beyond an RTO, as long as the maximum
 latency increase is not reached.
@@ -763,9 +782,9 @@ of data packets at the LOOPS ingress.
 # Sketches of Bindings to Tunnel Protocols {#sec-sketches}
 
 The LOOPS information defined above in a generic way can be mapped to
-specific tunnel encapsulation protocols.  Sketches for two tunnel
-protocols are given below: Geneve ({{sec-geneve}}), and GUE
-({{sec-gue}}).  The actual encapsulation can be designed in a "native"
+specific tunnel encapsulation protocols.  A sketch for the tunnel
+protocol Geneve is given below ({{sec-geneve}}).
+The actual encapsulation can be designed in a "native"
 way by putting each of the various elements into the TLV format of the
 encapsulation protocol, or it can be achieved by providing single
 TLVs for forward and reverse information and using some generic
@@ -784,6 +803,7 @@ information for the LOOPS tunnel.
 
 More details for a Geneve binding for LOOPS can be found in {{-geneve-binding}}.
 
+<!--
 ## Embedding LOOPS in GUE {#sec-gue}
 
 GUE {{-gue}} is an extensible overlay protocol which
@@ -799,10 +819,7 @@ message with the C-bit set in the GUE header.  The Proto/ctype field
 contains a control message type when C bit is set.  Hence a new
 control message type should be defined for such LOOPS reverse
 information.
-
-## Embedding LOOPS in SRv6 {#sec-srv6}
-
-An SRv6 binding for LOOPS is proposed in {{-srv6-binding}}.
+ -->
 
 # IANA Considerations
 
@@ -1146,8 +1163,8 @@ that value.
 # Acknowledgements
 {: numbered="no"}
 
-Sami Boutros helped with sketching the use of Geneve ({{sec-geneve}}),
-and Tom Herbert helped with sketching the use of GUE ({{sec-gue}}).
+Sami Boutros helped with sketching the use of Geneve ({{sec-geneve}}). <!-- ,
+and Tom Herbert helped with sketching the use of GUE ({{sec-gue}}). -->
 
 Michael Welzl has been supported by the Research Council of Norway under its “Toppforsk” programme through the “OCARINA” project.
 
@@ -1157,5 +1174,5 @@ Michael Welzl has been supported by the Research Council of Norway under its “
  -->
 <!--  LocalWords:  codepoint Geneve TLVs codepoints resequencing
  -->
-<!--  LocalWords:  resequences
+<!--  LocalWords:  resequences retransmissions
  -->
