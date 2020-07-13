@@ -5,8 +5,8 @@
 TSVWG                                                           M. Welzl
 Internet-Draft                                        University of Oslo
 Intended status: Standards Track                         C. Bormann, Ed.
-Expires: September 10, 2020                      Universitaet Bremen TZI
-                                                          March 09, 2020
+Expires: January 14, 2021                        Universitaet Bremen TZI
+                                                           July 13, 2020
 
 
                      LOOPS Generic Information Set
@@ -25,9 +25,9 @@ Abstract
    specific data packet format.
 
    The generic information set needs to be mapped to a specific
-   encapsulation protocol to actually run the LOOPS optimizations.  The
-   current version of this document contains sketches of bindings to GUE
-   [I-D.ietf-intarea-gue] and Geneve [I-D.ietf-nvo3-geneve].
+   encapsulation protocol to actually run the LOOPS optimizations.  A
+   companion document contains a sketch of a binding to the tunnel
+   encapsulation protocol Geneve [I-D.ietf-nvo3-geneve].
 
 Status of This Memo
 
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 10, 2020.
+   This Internet-Draft will expire on January 14, 2021.
 
 
 
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Welzl & Bormann        Expires September 10, 2020               [Page 1]
+Welzl & Bormann         Expires January 14, 2021                [Page 1]
 
-Internet-Draft                    LOOPS                       March 2020
+Internet-Draft                    LOOPS                        July 2020
 
 
 Copyright Notice
@@ -82,7 +82,6 @@ Table of Contents
      2.2.  Path Asymmetry  . . . . . . . . . . . . . . . . . . . . .   6
      2.3.  Reordering vs. Spurious Retransmission  . . . . . . . . .   6
      2.4.  Informing the End-to-End Transport  . . . . . . . . . . .   7
-     2.5.  Congestion Detection  . . . . . . . . . . . . . . . . . .   8
    3.  Simplifying assumptions . . . . . . . . . . . . . . . . . . .   8
    4.  LOOPS Architecture  . . . . . . . . . . . . . . . . . . . . .   9
    5.  LOOPS Generic Information Set . . . . . . . . . . . . . . . .  10
@@ -99,34 +98,33 @@ Table of Contents
        6.3.2.  ACK generation  . . . . . . . . . . . . . . . . . . .  15
      6.4.  Loss detection and Recovery . . . . . . . . . . . . . . .  15
        6.4.1.  Local Retransmission  . . . . . . . . . . . . . . . .  15
-       6.4.2.  FEC . . . . . . . . . . . . . . . . . . . . . . . . .  16
+       6.4.2.  FEC . . . . . . . . . . . . . . . . . . . . . . . . .  15
      6.5.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .  16
    7.  Sketches of Bindings to Tunnel Protocols  . . . . . . . . . .  16
-     7.1.  Embedding LOOPS in Geneve . . . . . . . . . . . . . . . .  17
-     7.2.  Embedding LOOPS in GUE  . . . . . . . . . . . . . . . . .  17
+     7.1.  Embedding LOOPS in Geneve . . . . . . . . . . . . . . . .  16
    8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  17
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  17
+     9.1.  Threat model  . . . . . . . . . . . . . . . . . . . . . .  17
+     9.2.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 
 
-Welzl & Bormann        Expires September 10, 2020               [Page 2]
+Welzl & Bormann         Expires January 14, 2021                [Page 2]
 
-Internet-Draft                    LOOPS                       March 2020
+Internet-Draft                    LOOPS                        July 2020
 
 
-     9.1.  Threat model  . . . . . . . . . . . . . . . . . . . . . .  18
-     9.2.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .  19
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  19
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .  19
-     10.2.  Informative References . . . . . . . . . . . . . . . . .  19
-   Appendix A.  Protocol used in Prototype Implementation  . . . . .  21
-     A.1.  Block Code FEC  . . . . . . . . . . . . . . . . . . . . .  22
-   Appendix B.  Transparent mode . . . . . . . . . . . . . . . . . .  23
-     B.1.  Packet identification . . . . . . . . . . . . . . . . . .  24
-     B.2.  Generic information and protocol operation  . . . . . . .  25
-     B.3.  A hybrid mode . . . . . . . . . . . . . . . . . . . . . .  25
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  27
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  18
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  18
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  18
+   Appendix A.  Protocol used in Prototype Implementation  . . . . .  20
+     A.1.  Block Code FEC  . . . . . . . . . . . . . . . . . . . . .  21
+   Appendix B.  Transparent mode . . . . . . . . . . . . . . . . . .  22
+     B.1.  Packet identification . . . . . . . . . . . . . . . . . .  23
+     B.2.  Generic information and protocol operation  . . . . . . .  24
+     B.3.  A hybrid mode . . . . . . . . . . . . . . . . . . . . . .  24
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  26
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
 1.  Introduction
 
@@ -162,18 +160,18 @@ Internet-Draft                    LOOPS                       March 2020
    specific encapsulation protocol to actually run the LOOPS
    optimizations.  LOOPS is not tied to any specific overlay protocol,
    but is meant to run embedded into a variety of tunnel protocols.
-
-
-
-Welzl & Bormann        Expires September 10, 2020               [Page 3]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    LOOPS information is added as part of a tunnel protocol header at the
-   LOOPS ingress as shown in Figure 1.  The current version of this
-   document contains sketches of bindings to GUE [I-D.ietf-intarea-gue]
-   and Geneve [I-D.ietf-nvo3-geneve].
+   LOOPS ingress as shown in Figure 1.  A companion document
+
+
+
+Welzl & Bormann         Expires January 14, 2021                [Page 3]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
+   [I-D.bormann-loops-geneve-binding] contains a sketch of a binding to
+   the tunnel encapsulation protocol Geneve [I-D.ietf-nvo3-geneve].
 
              +------------------------------------+
              |           Outer header             |
@@ -221,9 +219,11 @@ Internet-Draft                    LOOPS                       March 2020
 
 
 
-Welzl & Bormann        Expires September 10, 2020               [Page 4]
+
+
+Welzl & Bormann         Expires January 14, 2021                [Page 4]
 
-Internet-Draft                    LOOPS                       March 2020
+Internet-Draft                    LOOPS                        July 2020
 
 
 1.1.  Terminology
@@ -243,7 +243,9 @@ Internet-Draft                    LOOPS                       March 2020
 
    LOOPS Segment:  A part of an end-to-end path covered by a single
       instance of the LOOPS protocol, the sub-path between the LOOPS
-      Ingress and the LOOPS Egress.
+      Ingress and the LOOPS Egress.  Several LOOPS segments may be
+      encountered on an end-to-end path, with or without intervening
+      routers.
 
    LOOPS Ingress:  The node that forwards data packets and forward
       information into the LOOPS segment, potentially performing
@@ -270,17 +272,18 @@ Internet-Draft                    LOOPS                       March 2020
       the LOOPS Nodes.
 
    PSN:  Packet Sequence Number, a sequence number identifying a data
-      packet.
+      packet between the LOOPS Ingress and Egress.
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021                [Page 5]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
    Sender:  Original sender of a packet on an end-to-end path that
       includes one or more LOOPS segment(s).
-
-
-
-Welzl & Bormann        Expires September 10, 2020               [Page 5]
-
-Internet-Draft                    LOOPS                       March 2020
-
 
    Receiver:  Ultimate receiver of a packet on an end-to-end path that
       includes one or more LOOPS segment(s).
@@ -311,7 +314,7 @@ Internet-Draft                    LOOPS                       March 2020
 
    The end-to-end transport layer protocol may have its own
    retransmission mechanism to recover lost packets.  When LOOPS
-   recovers a loss, ideally this local recovery would avoid the
+   recovers a loss, ideally this local recovery would replace the
    triggering of a retransmission at the end-to-end sender.
 
    Whether this is possible depends on the specific end-to-end mechanism
@@ -327,18 +330,19 @@ Internet-Draft                    LOOPS                       March 2020
    retransmission detection, there also will be little long-term effect
    on the send rate.)
 
-   The waste of bandwidth caused by a DUPACK-based end-to-end
-   retransmission can be avoided when the end-to-end loss detection is
-   based on time instead of sequence numbers, e.g., with RACK
 
 
 
-Welzl & Bormann        Expires September 10, 2020               [Page 6]
+Welzl & Bormann         Expires January 14, 2021                [Page 6]
 
-Internet-Draft                    LOOPS                       March 2020
+Internet-Draft                    LOOPS                        July 2020
 
 
-   [I-D.ietf-tcpm-rack].  This requires a limit on the additional
+   While LOOPS makes no requirements on end-to-end protocols, it is
+   worth noting that the waste of bandwidth caused by a DUPACK-based
+   end-to-end retransmission can be avoided when the end-to-end loss
+   detection is based on time instead of sequence numbers, e.g., with
+   RACK [I-D.ietf-tcpm-rack].  This requires a limit on the additional
    latency that LOOPS will incur in its attempt to recover the loss
    locally.  In the present version of this document, opportunity to set
    such a limit is provided in the Setup Information.  The limit can be
@@ -353,7 +357,8 @@ Internet-Draft                    LOOPS                       March 2020
    sending rate.  With LOOPS operating, packet loss can be masked from
    the sender as the loss may have been locally recovered.  In this
    case, rate reduction may not be invoked at the sender.  This is a
-   desirable performance improvement if the loss was a random loss.
+   desirable performance improvement if the loss was a random loss, but
+   it is hard to ascertain that.
 
    If LOOPS successfully conceals congestion losses from the end-to-end
    transport protocol, that might increase the rate to a level that
@@ -375,53 +380,33 @@ Internet-Draft                    LOOPS                       March 2020
    (DUPACKs) initiates a retransmission and reduces the sending rate.
    When spurious retransmission detection (e.g., via F-RTO [RFC5862] or
    DSACK [RFC3708]) is enabled by the TCP sender, it will often be able
-   undo the unnecessary window reduction.  As LOOPS recovers lost
-   packets locally, in most cases the end host sender will eventually
-   find out its reordering-based retransmission (if any) is spurious.
-   This is an appropriate performance improvement if the loss was a
-   random loss.  For congestion losses, a congestion event needs to be
-   signaled to the end-to-end transport.
-
-   If the end-to-end transport is ECN-capable (which is visible at the
-   IP level), congestion loss events can easily be signaled to them by
-   setting the CE (congestion experienced) mark.  If LOOPS detects a
-   congestion loss for a non-ECT packet, it needs to signal a congestion
+   undo the unnecessary window reduction shortly afterwards.  As LOOPS
+   recovers lost packets locally, in most cases the end host sender will
+   eventually find out its reordering-based retransmission (if any) is
+   spurious.  This is an appropriate performance improvement if the loss
+   was a random loss.  For congestion losses, a congestion event needs
+   to be signaled to the end-to-end transport.
 
 
 
-Welzl & Bormann        Expires September 10, 2020               [Page 7]
+Welzl & Bormann         Expires January 14, 2021                [Page 7]
 
-Internet-Draft                    LOOPS                       March 2020
+Internet-Draft                    LOOPS                        July 2020
 
 
-   loss event by introducing a packet loss.  This can be done by
-   choosing not to retransmit or repair the packet loss locally in this
-   case.  Note that one congestion loss per end-to-end RTT is sufficient
-   to provide the rate reduction, so LOOPS may still be able to recover
-   most packets, in particular for burst losses.  (As LOOPS does not
-   interact with the end-to-end transport, it does not know the end-to-
-   end RTT.  Some lower bound derived from configuration and
-   measurements could be used instead.)
+   The present version of LOOPS requires the end-to-end transport to be
+   ECN-capable (which is visible at the IP level).  Congestion loss
+   events can easily be signaled to them by setting the CE (congestion
+   experienced) mark.  Effectively, LOOPS converts a packet loss (which
+   would be a congestion indication) to a CE mark (which also is a
+   congestion indication).
 
-2.5.  Congestion Detection
-
-   Properly informing the end-to-end transport protocol about congestion
-   loss events requires distinguishing these from random losses.  In
-   some special cases, distinguishing information may be available from
-   a link layer (e.g., see Section 3 of
-   [I-D.li-tsvwg-loops-problem-opportunities]).  By enabling ECN inside
-   the tunnel, congestion events experienced at ECN-capable routers will
-   usually be identified by the CE mark, which clearly rules out a
-   random loss.
-
-   In the general case, the segment may be composed of hops without such
-   special indications.  In these cases, some detection mechanism is
-   required to provide this distinguishing information.  The specific
-   mechanism used by an implementation is out of scope of LOOPS, but
-   LOOPS will need to provide measurement information for this
-   mechanism.  For instance, congestion detection might be based on path
-   segment latency information, the proper measurement of which
-   therefore requires special attention in LOOPS.
+   In effect, LOOPS can be used to convert a path segment that does not
+   yet use CE marks for congestion indication, and drops packets
+   instead, into a segment that marks for congestion and does not drop
+   packets except in extreme cases, incurring the benefits of Using
+   Explicit Congestion Notification (ECN) [RFC8087].  We speak about the
+   "drop-to-mark" function of LOOPS.
 
 3.  Simplifying assumptions
 
@@ -442,14 +427,6 @@ Internet-Draft                    LOOPS                       March 2020
    LOOPS ultimately is to assist the end-to-end protocol, it is likely
    that some cooperation between them would be beneficial, e.g., to
    obtain some measurements that cover a larger part of the end-to-end
-
-
-
-Welzl & Bormann        Expires September 10, 2020               [Page 8]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    path.  For instance, cooperating LOOPS segments could try to divide
    up permissible increases to end-to-end latency between them.  This is
    out of scope for the present version.
@@ -463,6 +440,15 @@ Internet-Draft                    LOOPS                       March 2020
    parameters) by some control plane mechanism that is out of scope for
    this specification.  This means there is no need in the LOOPS
    protocol itself to manage setup information.
+
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021                [Page 8]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
 4.  LOOPS Architecture
 
@@ -495,16 +481,8 @@ Internet-Draft                    LOOPS                       March 2020
 
    The above describes the "tunnel mode".  A transparent mode is
    described in Appendix B, which does not modify the data packets and
-   therefore needs to send any forward information (if needed, for FEC)
-   in separate packets, usually aggregated.
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020               [Page 9]
-
-Internet-Draft                    LOOPS                       March 2020
-
+   therefore needs to send any forward information (if needed, e.g., for
+   FEC) in separate packets, usually aggregated.
 
    The LOOPS _generic information set_ defines what information is
    provided as setup information, forward information, and reverse
@@ -515,6 +493,18 @@ Internet-Draft                    LOOPS                       March 2020
    needs to be defined as well.  The various bindings aim for some
    commonality, so that an implementation for multiple bindings does not
    need to support gratuitous variety between them.
+
+
+
+
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021                [Page 9]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
 5.  LOOPS Generic Information Set
 
@@ -555,13 +545,6 @@ Internet-Draft                    LOOPS                       March 2020
 
    o  anything that the FEC scheme needs.
 
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 10]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    The first four together (say, 3+24+4+1) might even fit into 32 bits,
    but probably need up to 48 bits total.  FEC info of course often
    needs more space.
@@ -571,6 +554,14 @@ Internet-Draft                    LOOPS                       March 2020
 
    24 bits of PSN, minus one bit for sequence number arithmetic, gives 8
    million packets (or 2.4 GB at typical packet sizes) per worst-case
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 10]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    RTT.  So if that is, say, 30 seconds, this would be enough to fill
    640 Mbit/s.
 
@@ -610,14 +601,6 @@ Internet-Draft                    LOOPS                       March 2020
    The latency calculation is done by the sender, who occasionally sets
    "ACK desirable", and notes down the absolute time of transmission for
    this data packet (the timekeeping can be done quite efficiently as
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 11]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    deltas).  Upon reception of a block 1 ACK, it can then subtract that
    from the absolute time of reception indicated.  This assumes time
    synchronization between the nodes is at least as good as the
@@ -626,6 +609,14 @@ Internet-Draft                    LOOPS                       March 2020
    synchronization only).  A sender can freely garbage collect noted
    down transmission time information; doing this too early just means
    that the quality of the RTT sampling will reduce.
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 11]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
 6.  LOOPS General Operation
 
@@ -666,14 +657,6 @@ Internet-Draft                    LOOPS                       March 2020
 
    The initial PSN is assigned unilaterally by the LOOPS ingress,
    selected randomly.  The ingress will keep setting the I flag to one
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 12]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    when it starts to send packets from a new beginning or whenever it
    believes there is a need to notify the egress about a new initial
    PSN.  The ingress will stop setting the I flag when it receives an
@@ -683,6 +666,14 @@ Internet-Draft                    LOOPS                       March 2020
    stops performing services that assume a sequential PSN.  The egress
    will no longer provide acknowledgement information for the packets
    with PSN smaller than this new initial PSN (per sequence number
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 12]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    arithmetic [IEN74]).  The egress sends acknowledgement information
    back without any delay by echoing the value of the I flag in the R
    flag.  This also means the egress unsets the R flag in subsequent
@@ -722,14 +713,6 @@ Internet-Draft                    LOOPS                       March 2020
    the absolute time of reception of the packet.  The LOOPS ingress can
    subtract the absolute time of transmission that it still has
    available, resulting in one high quality latency sample.  (In an
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 13]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    alternative design, the forward information could include the
    absolute time of transmission as well, and block1 information would
    echo it back.  This trades memory management at the ingress for
@@ -739,6 +722,14 @@ Internet-Draft                    LOOPS                       March 2020
    specific copy is acknowledged in a block 1 acknowledgement: the
    acknowledgement for the initial (or, more generally, an earlier) copy
    may have been delayed (ACK ambiguity)).  The LOOPS ingress therefore
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 13]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    SHOULD NOT base its measurements on acknowledgements for
    retransmitted data packets.  One way to achieve this is by not
    setting the "ACK desired" bit on retransmissions in the first place.
@@ -777,20 +768,23 @@ Internet-Draft                    LOOPS                       March 2020
    of LRTT is more accurate for such packets.  A smoothed local segment
    round trip time S_LRTT can be computed in a similar way as defined by
    [RFC0793].  A recent minimum value of LRTT is also kept as min_LRTT.
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 14]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    S_LRTT is used as a basis for the overall timing of retransmission
    and state management.
 
    Retransmitted packets MUST NOT be used for local segment round trip
    time (LRTT) calculation.
+
+
+
+
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 14]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
 6.3.2.  ACK generation
 
@@ -825,22 +819,11 @@ Internet-Draft                    LOOPS                       March 2020
    in [RFC6298]).  Packet retransmission should then not be performed
    more than once within an LRTT.
 
-   When a retransmission is desired (see Section 2.4 for why it might
-   not be), the LOOPS ingress performs the local in-network recovery by
-   retransmitting the packet.  Further retransmissions may be desirable
-   if the lack of ACK is persistent beyond an RTO, as long as the
-   maximum latency increase is not reached.
-
-
-
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 15]
-
-Internet-Draft                    LOOPS                       March 2020
-
+   When a retransmission is desired, the LOOPS ingress performs the
+   local in-network recovery by retransmitting the packet.  Further
+   retransmissions may be desirable if the lack of ACK is persistent
+   beyond an RTO, as long as the maximum latency increase is not
+   reached.
 
 6.4.2.  FEC
 
@@ -851,6 +834,13 @@ Internet-Draft                    LOOPS                       March 2020
    The FEC rate (amount of redundancy added) and possibly the FEC scheme
    could be unilaterally adjusted by the LOOPS ingress in an adaptive
    mechanism based on the measurement information.
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 15]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
 6.5.  Discussion
 
@@ -877,26 +867,13 @@ Internet-Draft                    LOOPS                       March 2020
 7.  Sketches of Bindings to Tunnel Protocols
 
    The LOOPS information defined above in a generic way can be mapped to
-   specific tunnel encapsulation protocols.  Sketches for two tunnel
-   protocols are given below: Geneve (Section 7.1), and GUE
-   (Section 7.2).  The actual encapsulation can be designed in a
-   "native" way by putting each of the various elements into the TLV
-   format of the encapsulation protocol, or it can be achieved by
-   providing single TLVs for forward and reverse information and using
-   some generic encoding of both kinds of information as shown in
-   Appendix B.3.
-
-
-
-
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 16]
-
-Internet-Draft                    LOOPS                       March 2020
-
+   specific tunnel encapsulation protocols.  A sketch for the tunnel
+   protocol Geneve is given below (Section 7.1).  The actual
+   encapsulation can be designed in a "native" way by putting each of
+   the various elements into the TLV format of the encapsulation
+   protocol, or it can be achieved by providing single TLVs for forward
+   and reverse information and using some generic encoding of both kinds
+   of information as shown in Appendix B.3.
 
 7.1.  Embedding LOOPS in Geneve
 
@@ -912,21 +889,14 @@ Internet-Draft                    LOOPS                       March 2020
    More details for a Geneve binding for LOOPS can be found in
    [I-D.bormann-loops-geneve-binding].
 
-7.2.  Embedding LOOPS in GUE
 
-   GUE [I-D.ietf-intarea-gue] is an extensible overlay protocol which
-   can embed LOOPS functions.  GUE uses flags to indicate the presence
-   of fixed length header extensions.  It also allows variable length
-   extensions to be put in "Private data" field.  A new LOOPS data block
-   in the "private data" field needs to be defined based on the LOOPS
-   generic information in Section 5.
 
-   In the reverse direction, when no data packets are available for
-   piggybacking, LOOPS reverse information is carried in a control
-   message with the C-bit set in the GUE header.  The Proto/ctype field
-   contains a control message type when C bit is set.  Hence a new
-   control message type should be defined for such LOOPS reverse
-   information.
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 16]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
 8.  IANA Considerations
 
@@ -946,14 +916,6 @@ Internet-Draft                    LOOPS                       March 2020
    provide information about preferred configurations of the
    encapsulation protocol employed, including security mechanisms, and
    to provide a security considerations section discussing the
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 17]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    combination.  The following discussion aims at discussing security
    considerations that will be common between different encapsulations.
 
@@ -983,6 +945,15 @@ Internet-Draft                    LOOPS                       March 2020
        class of attackers is considered out of scope for these security
        considerations.
 
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 17]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    2.  on-path read + inject: The attacker sees packets under way on the
        segment and can inject new packets.
 
@@ -998,17 +969,6 @@ Internet-Draft                    LOOPS                       March 2020
        Similar considerations apply as for class 2, except that the
        "blind" class 3 attacker might need to guess information it could
        have extracted from the packet stream in class 2.
-
-
-
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 18]
-
-Internet-Draft                    LOOPS                       March 2020
-
 
 9.2.  Discussion
 
@@ -1041,6 +1001,15 @@ Internet-Draft                    LOOPS                       March 2020
               RFC 793, DOI 10.17487/RFC0793, September 1981,
               <https://www.rfc-editor.org/info/rfc793>.
 
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 18]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    [RFC1982]  Elz, R. and R. Bush, "Serial Number Arithmetic", RFC 1982,
               DOI 10.17487/RFC1982, August 1996,
               <https://www.rfc-editor.org/info/rfc1982>.
@@ -1056,15 +1025,6 @@ Internet-Draft                    LOOPS                       March 2020
               Correction (FEC) Building Block", RFC 5052,
               DOI 10.17487/RFC5052, August 2007,
               <https://www.rfc-editor.org/info/rfc5052>.
-
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 19]
-
-Internet-Draft                    LOOPS                       March 2020
-
 
    [RFC5862]  Yasukawa, S. and A. Farrel, "Path Computation Clients
               (PCC) - Path Computation Element (PCE) Requirements for
@@ -1092,35 +1052,36 @@ Internet-Draft                    LOOPS                       March 2020
               JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
               June 2019, <https://www.rfc-editor.org/info/rfc8610>.
 
+   [RFC8087]  Fairhurst, G. and M. Welzl, "The Benefits of Using
+              Explicit Congestion Notification (ECN)", RFC 8087,
+              DOI 10.17487/RFC8087, March 2017,
+              <https://www.rfc-editor.org/info/rfc8087>.
+
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 19]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    [I-D.ietf-tcpm-rack]
               Cheng, Y., Cardwell, N., Dukkipati, N., and P. Jha, "RACK:
               a time-based fast loss detection algorithm for TCP",
-              draft-ietf-tcpm-rack-07 (work in progress), January 2020.
+              draft-ietf-tcpm-rack-08 (work in progress), March 2020.
 
    [I-D.ietf-nvo3-geneve]
               Gross, J., Ganga, I., and T. Sridhar, "Geneve: Generic
               Network Virtualization Encapsulation", draft-ietf-
               nvo3-geneve-16 (work in progress), March 2020.
 
-   [I-D.ietf-intarea-gue]
-              Herbert, T., Yong, L., and O. Zia, "Generic UDP
-              Encapsulation", draft-ietf-intarea-gue-09 (work in
-              progress), October 2019.
-
    [I-D.li-tsvwg-loops-problem-opportunities]
-              Yizhou, L., Zhou, X., Boucadair, M., and J. Wang, "LOOPS
-              (Localized Optimizations on Path Segments) Problem
+              Yizhou, L., Zhou, X., Boucadair, M., Wang, J., and F. Qin,
+              "LOOPS (Localized Optimizations on Path Segments) Problem
               Statement and Opportunities for Network-Assisted
               Performance Enhancement", draft-li-tsvwg-loops-problem-
-              opportunities-04 (work in progress), January 2020.
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 20]
-
-Internet-Draft                    LOOPS                       March 2020
-
+              opportunities-05 (work in progress), July 2020.
 
    [I-D.ietf-tsvwg-tunnel-congestion-feedback]
               Wei, X., Yizhou, L., Boutros, S., and L. Geng, "Tunnel
@@ -1129,7 +1090,7 @@ Internet-Draft                    LOOPS                       March 2020
 
    [I-D.bormann-loops-geneve-binding]
               Bormann, C., "Embedding LOOPS in Geneve", draft-bormann-
-              loops-geneve-binding-00 (work in progress), November 2019.
+              loops-geneve-binding-01 (work in progress), June 2020.
 
    [IEN74]    Plummer, W., "Sequence Number Arithmetic", Internet
               Experiment Note 74, September 1978.
@@ -1154,6 +1115,13 @@ Appendix A.  Protocol used in Prototype Implementation
 
    The forward information includes:
 
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 20]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    o  Packet Sequence Number (PSN) (32 bits): This identifies a packet
       over a specific overlay segment from a specific LOOPS Ingress.  If
       a packet is retransmitted by LOOPS, the retransmission uses the
@@ -1170,14 +1138,6 @@ Appendix A.  Protocol used in Prototype Implementation
 
    o  FEC Info for Block Code (56 bits): This header is used in FEC
       mode.  It currently only provides for a block code FEC scheme.  It
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 21]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
       includes the Source Block Number (SBN), Encoding Symbol ID (ESI),
       number of symbols in a single source block and symbol size.
       Appendix A.1 gives more details on FEC.
@@ -1211,6 +1171,13 @@ A.1.  Block Code FEC
 
    o  T: 16 bits.  Symbol size in bytes.
 
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 21]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    The LOOPS Ingress uses the data packet in Figure 1 to generate the
    encoding packet.  Both source packets and repair packets carry the
    FEC header information; the LOOPS Egress reconstructs the data
@@ -1222,17 +1189,6 @@ A.1.  Block Code FEC
    The LOOPS Nodes need to agree on the use of FEC block mode and on the
    specific FEC Encoding ID to use; this is currently done by
    configuration.
-
-
-
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 22]
-
-Internet-Draft                    LOOPS                       March 2020
-
 
 Appendix B.  Transparent mode
 
@@ -1249,6 +1205,34 @@ Appendix B.  Transparent mode
    the LOOPS implementations.  The LOOPS process would occasionally
    inject recovered packets back into the LOOPS egress node's forwarding
    switch, see Figure 3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 22]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
               |
       +-------+-------------------------------------------+
@@ -1282,14 +1266,6 @@ Appendix B.  Transparent mode
    unchanged.  The obvious disadvantage is that no forward information
    can be provided with each data packet, so a replacement needs to be
    found for the PSN (packet sequence number) employed in encapsulated
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 23]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
    mode.  Any forward information beyond the data packets is sent in
    separate packets exchanged directly between the LOOPS nodes.
 
@@ -1305,6 +1281,14 @@ B.1.  Packet identification
    measurement errors as well as missed retransmission opportunities.
    The latter will be fixed end-to-end.  The tolerance for measurement
    errors would influence the degree of accuracy that is aimed for.
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 23]
+
+Internet-Draft                    LOOPS                        July 2020
+
 
    Packet identification can be based on a cryptographic hash of the
    packet, computed in LOOPS ingress and egress using the same algorithm
@@ -1334,18 +1318,6 @@ B.1.  Packet identification
    acknowledged.  With this change, the LOOPS egress will send reverse
    information as in the encapsulating LOOPS protocol.
 
-
-
-
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 24]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
 B.2.  Generic information and protocol operation
 
    With the changes outlined above, transparent mode operates just as
@@ -1367,6 +1339,13 @@ B.3.  A hybrid mode
 
    The GRE packet header then has the form:
 
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 24]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
       0                   1                   2                   3
       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -1383,24 +1362,6 @@ B.3.  A hybrid mode
    Rough ideas for both directions are given below in CDDL [RFC8610].
    This information set could be encoded in CBOR or in a bespoke
    encoding; details such as this can be defined later.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 25]
-
-Internet-Draft                    LOOPS                       March 2020
-
 
    forward-information = [
      [rel-psn, ack-desired, ? fec-info] /
@@ -1432,6 +1393,15 @@ Internet-Draft                    LOOPS                       March 2020
 
    If left out for a sequence number, the fec-info block is constructed
    by adding one to the previous one.  fec-repair-data contain repair
+
+
+
+
+Welzl & Bormann         Expires January 14, 2021               [Page 25]
+
+Internet-Draft                    LOOPS                        July 2020
+
+
    symbols for the sbn/esi given (which, again, are reconstructed from
    context if not given).
 
@@ -1450,18 +1420,9 @@ Internet-Draft                    LOOPS                       March 2020
    rounded down to a multiple of 8, and adding 8*(end-psn-delta+1) to
    that value.
 
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 26]
-
-Internet-Draft                    LOOPS                       March 2020
-
-
 Acknowledgements
 
-   Sami Boutros helped with sketching the use of Geneve (Section 7.1),
-   and Tom Herbert helped with sketching the use of GUE (Section 7.2).
+   Sami Boutros helped with sketching the use of Geneve (Section 7.1).
 
    Michael Welzl has been supported by the Research Council of Norway
    under its "Toppforsk" programme through the "OCARINA" project.
@@ -1492,21 +1453,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Welzl & Bormann        Expires September 10, 2020              [Page 27]
+Welzl & Bormann         Expires January 14, 2021               [Page 26]
